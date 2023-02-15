@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,9 +9,82 @@
   <link rel="stylesheet" href="./pages/index.css">
   <link rel="stylesheet" href="./style.css">
 </head>
+
 <body class="root">
   <header class="header">
-    <img src="./images/Vector.png" class="header__logo" alt="лого место">
+    <img src="./images/logo mesto.png" class="header__logo" alt="лого место">
   </header>
+
+  <main class="content">
+    <section class="profile">
+      <div class="profile__intro-container">
+        <img src="./images/profile.img.jpg" class="profile__avatar" alt="аватарка профиля">
+        <div class="profile__info">
+          <div class="profile__container">
+            <h1 class="profile__name">Жак-Ив Кусто</h1>
+            <button type="button" class="profile__button-edit">
+              <img src="./images/img_edit.png" alt="кнопка редактирования профиля">
+            </button>
+          </div>
+          <p class="profile__status">Исследователь океана</p>
+        </div>
+      </div>
+      <button type="button" class="profile__button-add">
+        <img src="./images/img_plus.png" alt="кнопка добавления">
+      </button>
+    </section>
+
+    <section class="elements">
+      <article class="element">
+        <img src="./images/photo-karachaevo-cherkesia.png" class="element__photo" alt="фото Карачаево">
+        <div class="element__description">
+          <h3 class="element__caption">Карачаевск</h3>
+          <div class="element__like-button"></div>
+        </div>
+      </article>
+      <article class="element">
+        <img src="./images/photo-elbrus.png" class="element__photo" alt="фото гора Эльбрус">
+        <div class="element__description">
+          <h3 class="element__caption">Гора Эльбрус</h3>
+          <div class="element__like-button"></div>
+        </div>
+      </article>
+      <article class="element">
+        <img src="./images/photo-dombai.png" class="element__photo" alt="фото Домбай">
+        <div class="element__description">
+          <h3 class="element__caption">Домбай</h3>
+          <div class="element__like-button"></div>
+        </div>
+      </article>
+      <article class="element">
+        <img src="./images/photo-elbrus2.png" class="element__photo" alt="фото гора Эльбрус2">
+        <div class="element__description">
+          <h3 class="element__caption">гора Эльбрус</h3>
+          <div class="element__like-button"></div>
+        </div>
+      </article>
+      <article class="element">
+        <img src="./images/photo-dombai2.png" class="element__photo" alt="фото Домбай2">
+        <div class="element__description">
+          <h3 class="element__caption">Домбай</h3>
+          <div class="element__like-button"></div>
+        </div>
+      </article>
+      <article class="element">
+        <img src="./images/photo-karachaevo-cherkesia2.png" class="element__photo" alt="фото Карачаево-Черкессия">
+        <div class="element__description">
+          <h3 class="element__caption">Карачаево-Черкессия</h3>
+          <div class="element__like-button"></div>
+        </div>
+      </article>
+    </section>
+
+    <footer class="footer">
+      <p class="footer__copyright">© 2020 Mesto Russia</p>
+    </footer>
+
+
+  </main>
 </body>
+
 </html>
