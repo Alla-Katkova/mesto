@@ -1,0 +1,12 @@
+.popup__status {
+  border-radius: 0;
+  border: none;
+  padding-bottom: 13px;
+  font-size: 14px;
+  line-height: 17px;
+  border-bottom: 1px solid rgb(0, 0, 0, 0.2);
+  margin-bottom: 45px;
+  margin-left: 22px;
+  margin-right: 22px;
+  width: 82%;
+}
