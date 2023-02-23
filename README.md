@@ -10,4 +10,4 @@
 Возможность добавления и редактирования фотографий с помощью javascript
 
 **GitHub**
-[Ссылка на проект на GitHub]( https://alla-katkova.github.io/russian-travel/)
+[Ссылка на проект на GitHub]( https://alla-katkova.github.io/mesto/)
