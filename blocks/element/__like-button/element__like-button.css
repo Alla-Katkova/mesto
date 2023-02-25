@@ -5,4 +5,7 @@
   background-size: cover;
   height: 19px;
   width: 22px;
+  border: 0px;
+  box-shadow: none;
+  background-color: #FFFFFF;
 }

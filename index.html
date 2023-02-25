@@ -11,7 +11,7 @@
 
 <body class="root">
   <header class="header">
-    <img src="./images/logo_mesto.png" class="header__logo" alt="лого место">
+    <img src="./images/logo_mesto.svg" class="header__logo" alt="лого место">
   </header>
 
   <main class="content">
@@ -22,14 +22,14 @@
           <div class="profile__container">
             <h1 class="profile__name">Жак-Ив Кусто</h1>
             <button type="button" class="profile__button-edit">
-              <img src="./images/img_edit.png" alt="кнопка редактирования профиля">
+              <img src="./images/edit-button.svg" class="profile__img-edit" alt="кнопка редактирования профиля">
             </button>
           </div>
           <p class="profile__status">Исследователь океана</p>
         </div>
       </div>
       <button type="button" class="profile__button-add">
-        <img src="./images/img_plus.png" alt="кнопка добавления">
+        <img src="./images/img-plus.svg" class="profile__img-add" alt="кнопка добавления">
       </button>
     </section>
 
@@ -37,43 +37,43 @@
       <article class="element">
         <img src="./images/photo-karachaevo-cherkesia.png" class="element__photo" alt="фото Карачаево">
         <div class="element__description">
-          <h3 class="element__caption">Карачаевск</h3>
-          <div class="element__like-button"></div>
+          <h2 class="element__caption">Карачаевск</h2>
+          <button type="button" class="element__like-button"></button>
         </div>
       </article>
       <article class="element">
         <img src="./images/photo-elbrus.png" class="element__photo" alt="фото гора Эльбрус">
         <div class="element__description">
-          <h3 class="element__caption">Гора Эльбрус</h3>
-          <div class="element__like-button"></div>
+          <h2 class="element__caption">Гора Эльбрус</h2>
+          <button type="button" class="element__like-button"></button>
         </div>
       </article>
       <article class="element">
         <img src="./images/photo-dombai.png" class="element__photo" alt="фото Домбай">
         <div class="element__description">
-          <h3 class="element__caption">Домбай</h3>
-          <div class="element__like-button"></div>
+          <h2 class="element__caption">Домбай</h2>
+          <button type="button" class="element__like-button"></button>
         </div>
       </article>
       <article class="element">
         <img src="./images/photo-elbrus2.png" class="element__photo" alt="фото гора Эльбрус2">
         <div class="element__description">
-          <h3 class="element__caption">гора Эльбрус</h3>
-          <div class="element__like-button"></div>
+          <h2 class="element__caption">гора Эльбрус</h2>
+          <button type="button" class="element__like-button"></button>
         </div>
       </article>
       <article class="element">
         <img src="./images/photo-dombai2.png" class="element__photo" alt="фото Домбай2">
         <div class="element__description">
-          <h3 class="element__caption">Домбай</h3>
-          <div class="element__like-button"></div>
+          <h2 class="element__caption">Домбай</h2>
+          <button type="button" class="element__like-button"></button>
         </div>
       </article>
       <article class="element">
         <img src="./images/photo-karachaevo-cherkesia2.png" class="element__photo" alt="фото Карачаево-Черкессия">
         <div class="element__description">
-          <h3 class="element__caption">Карачаево-Черкессия</h3>
-          <div class="element__like-button"></div>
+          <h2 class="element__caption">Карачаево-Черкессия</h2>
+          <button type="button" class="element__like-button"></button>
         </div>
       </article>
     </section>
@@ -86,14 +86,14 @@
     <div class="popup__container">
       <button type="button" class="popup__close-button"></button>
       <h2 class="popup__heading">Редактировать профиль</h2>
-      <form class="popup__form">
-        <input type="text" class="popup__name" id="user-name" name="user-name" required>
-        <input type="text" class="popup__status" id="user-status" name="user-status">
+      <form class="popup__form" name="popupForm">
+        <input type="text" class="popup__input popup__input_name" id="user-name" name="user-name" required>
+        <input type="text" class="popup__input popup__input_status" id="user-status" name="user-status">
         <button type="submit" class="popup__save-button">Сохранить</button>
       </form>
     </div>
   </section>
-  <script src="./index.js"></script>
+  <script src="./scripts/index.js"></script>
 </body>
 
 </html>

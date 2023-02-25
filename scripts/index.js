@@ -17,9 +17,9 @@ function closePopup() {
 popupCloseButton.addEventListener("click", closePopup);
 
 /*popup__save-button  кнопка сохранения*/
-let nameInput = popup.querySelector(".popup__name");
+let nameInput = popup.querySelector(".popup__input_name");
 console.log("поле имени: ", nameInput);
-let statusInput = popup.querySelector(".popup__status");
+let statusInput = popup.querySelector(".popup__input_status");
 console.log("поле статуса: ", statusInput);
 const popupSaveButton = popup.querySelector(".popup__save-button");
 console.log("сохранение фигни: ", popupSaveButton);
