@@ -1,6 +1,6 @@
 .popup__save-button {
-  margin-bottom: 25px;
-  margin-left: 22px;
+  margin-bottom: 0px;
+  margin-left: 0px;
   background: #000000;
   border-radius: 2px;
   font-weight: 400;
@@ -10,12 +10,17 @@
   width: 238px;
   height: 46px;
   color: #FFFFFF;
+  border: 0px;
 }
 
 @media screen and (min-width: 1280px) {
   .popup__save-button {
-    margin-left: 36px;
+    margin-left: 0px;
     width: 358px;
     height: 50px;
+    font-size: 18px;
+    line-height: 22px;
+    margin-top: 13px;
+    padding: 0px;
   }
 }
