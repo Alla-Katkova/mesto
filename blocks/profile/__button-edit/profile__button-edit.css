@@ -11,6 +11,8 @@
   background-size: cover;
   padding: 0px;
   margin-top: 10px;
+}
+.profile__button-edit:hover {
   cursor: pointer;
 }
 

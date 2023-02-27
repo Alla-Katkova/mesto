@@ -3,20 +3,28 @@
   display: flex;
   flex-direction: column;
   background-color: white;
-  border-radius: 18px;
   box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
   max-width: 282px;
+  box-sizing: border-box;
+  padding-left: 22px;
+  padding-right: 22px;
+  padding-top: 25px;
+  padding-bottom: 32px;
+  max-width: 282px;
+  top: 21%;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 10px;
 }
 
 @media screen and (min-width: 1280px) {
   .popup__container {
     max-width: 430px;
-    margin-left: auto;
-    margin-right: auto;
     top: 23%;
     padding-left: 36px;
     padding-top: 34px;
     padding-bottom: 37px;
-    box-sizing: border-box;
-}
+    padding-right: 36px;
+    border-radius: 18px;
+  }
 }

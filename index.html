@@ -21,14 +21,14 @@
         <div class="profile__info">
           <div class="profile__container">
             <h1 class="profile__name">Жак-Ив Кусто</h1>
-            <button type="button" class="profile__button-edit">
+            <button type="button" aria-label="edit" class="profile__button-edit">
               <img src="./images/edit-button.svg" class="profile__img-edit" alt="кнопка редактирования профиля">
             </button>
           </div>
           <p class="profile__status">Исследователь океана</p>
         </div>
       </div>
-      <button type="button" class="profile__button-add">
+      <button type="button" aria-label="add" class="profile__button-add">
         <img src="./images/img-plus.svg" class="profile__img-add" alt="кнопка добавления">
       </button>
     </section>
@@ -84,12 +84,12 @@
 
   <section class="popup popup_hidden">
     <div class="popup__container">
-      <button type="button" class="popup__close-button"></button>
+      <button type="button" aria-label="close" class="popup__close-button"></button>
       <h2 class="popup__heading">Редактировать профиль</h2>
       <form class="popup__form" name="popupForm">
         <input type="text" class="popup__input popup__input_name" id="user-name" name="user-name" required>
         <input type="text" class="popup__input popup__input_status" id="user-status" name="user-status">
-        <button type="submit" class="popup__save-button">Сохранить</button>
+        <button type="submit" aria-label="save" class="popup__save-button">Сохранить</button>
       </form>
     </div>
   </section>

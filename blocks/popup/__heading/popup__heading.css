@@ -6,7 +6,7 @@
   margin-top: 0px;
   margin-left: 0px;
   margin-right: 0px;
-  margin-bottom: 0px;
+  margin-bottom: 75px;
 }
 
 @media screen and (min-width: 1280px) {
@@ -15,5 +15,6 @@
     line-height: 29px;
     padding-right: 0px;
     padding-bottom: 43px;
+    margin-bottom: 0px;
   }
 }

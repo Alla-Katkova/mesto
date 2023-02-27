@@ -7,14 +7,19 @@
   background-color: transparent;
   background-size: contain;
   background-repeat: no-repeat;
+  right: 0px;
+  top: -41px;
+}
+
+.popup__close-button:hover {
   cursor: pointer;
-  margin-left: 93%;
-  top: -43px;
 }
 
 @media screen and (min-width: 1280px) {
   .popup__close-button {
     width: 32px;
     height: 32px;
+    right: -40px;
+    top: -43px;
   }
 }

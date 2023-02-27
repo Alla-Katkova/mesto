@@ -13,6 +13,10 @@
   border: 0px;
 }
 
+.popup__save-button:hover {
+  cursor: pointer;
+}
+
 @media screen and (min-width: 1280px) {
   .popup__save-button {
     margin-left: 0px;

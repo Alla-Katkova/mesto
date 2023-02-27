@@ -12,6 +12,9 @@
   height: 50px;
   box-sizing: border-box;
   padding: 0px;
+}
+
+.profile__button-add:hover {
   cursor: pointer;
 }
 

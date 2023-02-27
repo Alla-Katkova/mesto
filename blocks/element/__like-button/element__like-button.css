@@ -9,3 +9,7 @@
   box-shadow: none;
   background-color: #FFFFFF;
 }
+
+.element__like-button:hover {
+  cursor: pointer;
+}
