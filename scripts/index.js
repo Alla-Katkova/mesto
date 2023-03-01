@@ -21,9 +21,9 @@ popupCloseButton.addEventListener("click", closePopup);
 
 
 /*popup__save-button  кнопка сохранения*/
-let nameInput = popup.querySelector(".popup__input_name");
+let nameInput = popup.querySelector(".popup__input_type_name");
 //console.log("поле имени: ", nameInput);
-let statusInput = popup.querySelector(".popup__input_status");
+let statusInput = popup.querySelector(".popup__input_type_status");
 //console.log("поле статуса: ", statusInput);
 let popupForm = popup.querySelector(".popup__form");
 let profileName = document.querySelector(".profile__name");
