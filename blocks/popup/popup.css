@@ -8,6 +8,10 @@
   background-color: rgba(0, 0, 0, .5);
   /*display: flex;
   align-items: center;
-  justify-content: center;*/
+  justify-content: center; убрала после первой итерации */
   font-family: Inter, Arial, sans-serif;
+  display: flex;/*вернула после 2й итерации после замечания ревьювера (вместо top 21% and 23% у контйнера поп апа)*/
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
