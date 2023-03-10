@@ -12,3 +12,8 @@
   top: 20px;
   background-color: transparent;
 }
+
+.element__delete-button:hover {
+  cursor: pointer;
+  opacity: 0.5;
+}
