@@ -91,71 +91,95 @@ function submitFormAdd(event) {
     event.target.classList.toggle('element__like-button_active');
   });
 
-    elements.prepend(newElement);
+const newLinkFromInput = photoLinkInput.value;
+const newNameFromInput = placeNameInput.value
 
-    placeNameInput.value = "";
-    photoLinkInput.value = "";
-    closePopupUniversal(popupAdd)
-  }
+  elementPhoto.addEventListener('click', function() {
+    popupZoom.classList.toggle('popup_hidden');
+    const popupZoomImages = popupZoom.querySelector('.popup__images-zoom');
+    popupZoomImages.setAttribute('src', newLinkFromInput);
+    const popupZoomCaption = popupZoom.querySelector('.popup__caption-zoom');
+    popupZoomCaption.textContent = newNameFromInput;
+  });
+
+
+  elements.prepend(newElement);
+
+  placeNameInput.value = "";
+  photoLinkInput.value = "";
+  closePopupUniversal(popupAdd)
+}
 
 popupForm.addEventListener("submit", submitForm);
-  popupFormAdd.addEventListener("submit", submitFormAdd);
+popupFormAdd.addEventListener("submit", submitFormAdd);
 
 
 
-  //При загрузке на странице 6 карточек, которые добавит JavaScript
-  const initialCards = [
-    {
-      name: 'Архыз',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-    },
-    {
-      name: 'Челябинская область',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-    },
-    {
-      name: 'Иваново',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-    },
-    {
-      name: 'Камчатка',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-    },
-    {
-      name: 'Холмогорский район',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-    },
-    {
-      name: 'Байкал',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-    }
-  ];
-
-  const elements = document.querySelector('.elements')
-  initialCards.forEach(function (element) {
-    const newElement = document.querySelector('#elementTemplate').content.cloneNode(true);
-    const elementPhoto = newElement.querySelector('.element__photo');
-    elementPhoto.setAttribute('src', element.link);
-    console.log(element);
-    const elementCaption = newElement.querySelector('.element__caption');
-    elementCaption.textContent = element.name;
-
-    const deleteButton = newElement.querySelector('.element__delete-button');
-    deleteButton.addEventListener('click', handleDeleteButtonClick);
-
-    const likeButton = newElement.querySelector('.element__like-button');
-    likeButton.addEventListener('click', function (event) {
-      event.target.classList.toggle('element__like-button_active');
-    })
-
-    elements.append(newElement);
+//При загрузке на странице 6 карточек, которые добавит JavaScript
+const initialCards = [
+  {
+    name: 'Архыз',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+  },
+  {
+    name: 'Челябинская область',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+  },
+  {
+    name: 'Иваново',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+  },
+  {
+    name: 'Камчатка',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+  },
+  {
+    name: 'Холмогорский район',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+  },
+  {
+    name: 'Байкал',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
-  )
+];
 
-  function handleDeleteButtonClick(event) {
-    const button = event.target;
-    const elementToDelete = button.closest('.element');
-    elementToDelete.remove();
-  }
+const popupZoom = document.querySelector('.popup-zoom')
+const elements = document.querySelector('.elements')
+initialCards.forEach(function (element) {
+  const newElement = document.querySelector('#elementTemplate').content.cloneNode(true);
+  const elementPhoto = newElement.querySelector('.element__photo');
+  elementPhoto.setAttribute('src', element.link);
+  const elementCaption = newElement.querySelector('.element__caption');
+  elementCaption.textContent = element.name;
+
+  const deleteButton = newElement.querySelector('.element__delete-button');
+  deleteButton.addEventListener('click', handleDeleteButtonClick);
+
+  const likeButton = newElement.querySelector('.element__like-button');
+  likeButton.addEventListener('click', function (event) {
+    event.target.classList.toggle('element__like-button_active');
+  })
+
+  elementPhoto.addEventListener('click', function () {
+    popupZoom.classList.toggle('popup_hidden');
+    const popupZoomImages = popupZoom.querySelector('.popup__images-zoom');
+    popupZoomImages.setAttribute('src', element.link);
+    const popupZoomCaption = popupZoom.querySelector('.popup__caption-zoom');
+    popupZoomCaption.textContent = element.name;
+  });
+
+  elements.append(newElement);
+})
+
+function handleDeleteButtonClick(event) {
+  const button = event.target;
+  const elementToDelete = button.closest('.element');
+  elementToDelete.remove();
+}
+
+const popupCloseButtonZoom = popupZoom.querySelector('.popup__close-button-zoom');
+popupCloseButtonZoom.addEventListener("click", function () {
+  closePopupUniversal(popupZoom)
+});
 
 

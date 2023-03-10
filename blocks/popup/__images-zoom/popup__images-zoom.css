@@ -1,0 +1,11 @@
+.popup__images-zoom {
+  max-width: 240px;
+  height: 299px;
+}
+
+@media screen and (min-width: 1280px) {
+  .popup__images-zoom {
+  max-width: 433px;
+  height: 540px;
+}
+}
