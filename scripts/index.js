@@ -82,6 +82,10 @@ function submitFormAdd(event) {
   elementPhoto.setAttribute('src', photoLinkInput.value);
   const elementCaption = newElement.querySelector('.element__caption');
   elementCaption.textContent = placeNameInput.value;
+  
+  const deleteButton = newElement.querySelector('.element__delete-button');
+  deleteButton.addEventListener('click', handleDeleteButtonClick);
+
   elements.prepend(newElement);
 
   placeNameInput.value = "";
@@ -130,8 +134,17 @@ initialCards.forEach(function(element) {
   console.log(element);
   const elementCaption = newElement.querySelector('.element__caption');
   elementCaption.textContent = element.name;
+  const deleteButton = newElement.querySelector('.element__delete-button');
+  deleteButton.addEventListener('click', handleDeleteButtonClick);
+
+
   elements.append(newElement);
 }
 )
 
+function handleDeleteButtonClick(event) {
+const button = event.target;
+const elementToDelete = button.closest('.element');
+elementToDelete.remove();
+}
 
