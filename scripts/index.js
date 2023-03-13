@@ -25,8 +25,8 @@ let profileStatus = document.querySelector(".profile__status");
 //console.log("профиль статус " , profileStatus);
 
 
-let placeNameInput = popupAdd.querySelector(".popup__input_type_place_name");
-let photoLinkInput = popupAdd.querySelector(".popup__input_type_photo_link");
+let placeNameInput = popupAdd.querySelector(".popup__input_type_place-name");
+let photoLinkInput = popupAdd.querySelector(".popup__input_type_photo-link");
 let popupFormAdd = popupAdd.querySelector(".popup__form_add")
 //const popupSaveButtonAdd = popupAdd.querySelector(".popup__save-button_add");
 
