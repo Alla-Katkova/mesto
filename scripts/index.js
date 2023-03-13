@@ -78,6 +78,7 @@ function submitFormAdd(event) {
   event.preventDefault();
 
   const newElement = document.querySelector('#elementTemplate').content.cloneNode(true);
+  
   const elementPhoto = newElement.querySelector('.element__photo');
   elementPhoto.setAttribute('src', photoLinkInput.value);
   const elementCaption = newElement.querySelector('.element__caption');
