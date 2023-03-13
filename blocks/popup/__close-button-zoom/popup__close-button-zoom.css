@@ -1,6 +1,5 @@
 .popup__close-button-zoom {
-  margin-top: 200px;
-  margin-right: 40px;
+  position: absolute;
 }
 
 .popup__close-button-zoom:hover {
@@ -10,7 +9,6 @@
 
 @media screen and (min-width: 1280px) {
   .popup__close-button-zoom {
-    margin-right: 270px;
-    margin-top: 125px;
+   margin-top: -20px;
   }
 }

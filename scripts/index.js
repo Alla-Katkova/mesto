@@ -5,34 +5,34 @@ const profileButtonAdd = document.querySelector(".profile__button-add");
 
 
 //console.log('редакт кнопка: ', profileButtonEdit);
-const popup = document.querySelector(".popup");
+const popupProfileEdit = document.querySelector(".popup");
 const popupAdd = document.querySelector(".popup-add")
 
-const popupCloseButton = popup.querySelector(".popup__close-button");
+const popupCloseButtonProfileEdit = popupProfileEdit.querySelector(".popup__close-button");
 const popupCloseButtonAdd = popupAdd.querySelector(".popup__close-button-add");
 //console.log('закрытия кнопка: ', popupCloseButtonAdd);
-//console.log('закр кнопка: ', popupCloseButton);
+//console.log('закр кнопка: ', popupCloseButtonProfileEdit);
 
 /*popup__save-button  кнопка сохранения*/
-let nameInput = popup.querySelector(".popup__input_type_name");
+const nameInput = popupProfileEdit.querySelector(".popup__input_type_name");
 //console.log("поле имени: ", nameInput);
-let statusInput = popup.querySelector(".popup__input_type_status");
+const statusInput = popupProfileEdit.querySelector(".popup__input_type_status");
 //console.log("поле статуса: ", statusInput);
-let popupForm = popup.querySelector(".popup__form");
-let profileName = document.querySelector(".profile__name");
+const popupFormProfileEdit = popupProfileEdit.querySelector(".popup__form");
+const profileName = document.querySelector(".profile__name");
 //console.log("профиль имя " , profileName);
-let profileStatus = document.querySelector(".profile__status");
+const profileStatus = document.querySelector(".profile__status");
 //console.log("профиль статус " , profileStatus);
 
 
-let placeNameInput = popupAdd.querySelector(".popup__input_type_place-name");
-let photoLinkInput = popupAdd.querySelector(".popup__input_type_photo-link");
-let popupFormAdd = popupAdd.querySelector(".popup__form_add")
+const placeNameInput = popupAdd.querySelector(".popup__input_type_place-name");
+const photoLinkInput = popupAdd.querySelector(".popup__input_type_photo-link");
+const popupFormAdd = popupAdd.querySelector(".popup__form_add")
 //const popupSaveButtonAdd = popupAdd.querySelector(".popup__save-button_add");
 
 
 function openPopup() {
-  popup.classList.remove("popup_hidden")
+  popupProfileEdit.classList.remove("popup_hidden")
   // Информация из профиля пользователя загружается в соответствующие поля
   nameInput.value = profileName.textContent;
   statusInput.value = profileStatus.textContent;
@@ -48,7 +48,7 @@ function openPopupAdd() {
 
 
 //function closePopup() {
-//popup.classList.add("popup_hidden")
+//ProfileEdit.classList.add("popup_hidden")
 //}
 
 function closePopupUniversal(element) {
@@ -56,8 +56,8 @@ function closePopupUniversal(element) {
 }
 
 profileButtonEdit.addEventListener("click", openPopup);
-popupCloseButton.addEventListener("click", function () {
-  closePopupUniversal(popup)
+popupCloseButtonProfileEdit.addEventListener("click", function () {
+  closePopupUniversal(popupProfileEdit)
 });
 profileButtonAdd.addEventListener("click", openPopupAdd);
 popupCloseButtonAdd.addEventListener("click", function () {
@@ -65,12 +65,12 @@ popupCloseButtonAdd.addEventListener("click", function () {
 });
 
 
-function submitForm(event) {
+function submitFormProfileEdit(event) {
   event.preventDefault();
   //console.log(event);
   profileName.textContent = nameInput.value;
   profileStatus.textContent = statusInput.value;
-  closePopupUniversal(popup)
+  closePopupUniversal(popupProfileEdit)
 }
 
 
@@ -110,7 +110,7 @@ const newNameFromInput = placeNameInput.value
   closePopupUniversal(popupAdd)
 }
 
-popupForm.addEventListener("submit", submitForm);
+popupFormProfileEdit.addEventListener("submit", submitFormProfileEdit);
 popupFormAdd.addEventListener("submit", submitFormAdd);
 
 
