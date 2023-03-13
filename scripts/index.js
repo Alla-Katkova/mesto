@@ -1,7 +1,7 @@
 //открытие и закрытие поп ап
 const profileButtonEdit = document.querySelector(".profile__button-edit");
 const profileButtonAdd = document.querySelector(".profile__button-add");
-console.log('добавления кнопка: ', profileButtonAdd);
+//console.log('добавления кнопка: ', profileButtonAdd);
 
 
 //console.log('редакт кнопка: ', profileButtonEdit);
@@ -10,8 +10,8 @@ const popupAdd = document.querySelector(".popup-add")
 
 const popupCloseButton = popup.querySelector(".popup__close-button");
 const popupCloseButtonAdd = popupAdd.querySelector(".popup__close-button-add");
-console.log('закрытия кнопка: ', popupCloseButtonAdd);
-console.log('закр кнопка: ', popupCloseButton);
+//console.log('закрытия кнопка: ', popupCloseButtonAdd);
+//console.log('закр кнопка: ', popupCloseButton);
 
 /*popup__save-button  кнопка сохранения*/
 let nameInput = popup.querySelector(".popup__input_type_name");
