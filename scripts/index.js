@@ -25,13 +25,10 @@ const initialCards = [
   }
 ];
 
-
-
 //открытие и закрытие поп ап
 const profileButtonEdit = document.querySelector(".profile__button-edit");
 const profileButtonAdd = document.querySelector(".profile__button-add");
 //console.log('добавления кнопка: ', profileButtonAdd);
-
 
 //console.log('редакт кнопка: ', profileButtonEdit);
 const popupProfileEdit = document.querySelector(".popup");
@@ -169,75 +166,9 @@ function submitFormAdd(event) {
   popupFormAdd.reset();
 }
 
-
-
-
-/* function submitFormAdd(event) {
-  event.preventDefault();
-  const newElement = document.querySelector('#elementTemplate').content.querySelector('.element').cloneNode(true);
-  const elementPhoto = newElement.querySelector('.element__photo');
-  elementPhoto.setAttribute('src', photoLinkInput.value);
-  const elementCaption = newElement.querySelector('.element__caption');
-  elementCaption.textContent = placeNameInput.value;
-
-  const deleteButton = newElement.querySelector('.element__delete-button');
-  deleteButton.addEventListener('click', handleDeleteButtonClick);
-
-  const likeButton = newElement.querySelector('.element__like-button');
-  likeButton.addEventListener('click', function (event) {
-    event.target.classList.toggle('element__like-button_active');
-  }); */
-
-/* const newLinkFromInput = photoLinkInput.value;
-const newNameFromInput = placeNameInput.value
-
- */
-
-
-//elements.prepend(newElement);
-
-/* placeNameInput.value = "";
-photoLinkInput.value = "";
-closePopupUniversal(popupAdd) */
-
-
 popupFormProfileEdit.addEventListener("submit", submitFormProfileEdit);
 popupFormAdd.addEventListener("submit", submitFormAdd);
 
-
-
-//При загрузке на странице 6 карточек, которые добавит JavaScript
-
-
-
-
-
-
-//initialCards.forEach(function (element) {
-/*   const newElement = document.querySelector('#elementTemplate').content.cloneNode(true);
-  const elementPhoto = newElement.querySelector('.element__photo');
-  elementPhoto.setAttribute('src', element.link);
-  const elementCaption = newElement.querySelector('.element__caption');
-  elementCaption.textContent = element.name;
- 
-  const deleteButton = newElement.querySelector('.element__delete-button');
-  deleteButton.addEventListener('click', handleDeleteButtonClick);
- 
-  const likeButton = newElement.querySelector('.element__like-button');
-  likeButton.addEventListener('click', function (event) {
-    event.target.classList.toggle('element__like-button_active');
-  }) */
-
-/*   elementPhoto.addEventListener('click', function () {
-    popupZoom.classList.toggle('popup_hidden');
-    const popupZoomImages = popupZoom.querySelector('.popup__images-zoom');
-    popupZoomImages.setAttribute('src', element.link);
-    const popupZoomCaption = popupZoom.querySelector('.popup__caption-zoom');
-    popupZoomCaption.textContent = element.name;
-  }); */
-
-
-//})
 
 function handleDeleteButtonClick(event) {
   const button = event.target;
