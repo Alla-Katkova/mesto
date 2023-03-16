@@ -137,7 +137,7 @@ function createCard(cardData) {
   })
 
   elementPhoto.addEventListener('click', function () {
-    popupZoom.classList.toggle('popup_hidden');
+    openPopupUniversal(popupZoom);
     const popupZoomImages = popupZoom.querySelector('.popup__images-zoom');
     popupZoomImages.setAttribute('src', cardData.link);
     popupZoomImages.setAttribute('alt', cardData.name);
