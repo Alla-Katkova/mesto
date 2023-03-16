@@ -57,6 +57,9 @@ const popupFormAdd = popupAdd.querySelector(".popup__form_add")
 const popupZoom = document.querySelector('.popup-zoom')
 const elements = document.querySelector('.elements')
 
+const popupZoomImages = popupZoom.querySelector('.popup__images-zoom');
+const popupZoomCaption = popupZoom.querySelector('.popup__caption-zoom');
+
 /* function openPopup() {
 popupProfileEdit.classList.remove("popup_hidden")
 //Информация из профиля пользователя загружается в соответствующие поля
@@ -119,6 +122,13 @@ function submitFormProfileEdit(event) {
   closePopupUniversal(popupProfileEdit)
 }
 
+function handleOpenPopupFullImage(data) {
+  openPopupUniversal(popupZoom);
+  popupZoomImages.setAttribute('src', data.link);
+  popupZoomImages.setAttribute('alt', data.name);
+  popupZoomCaption.textContent = data.name;
+}
+
 
 function createCard(cardData) {
   const newElement = document.querySelector('#elementTemplate').content.querySelector('.element').cloneNode(true);
@@ -136,15 +146,7 @@ function createCard(cardData) {
     event.target.classList.toggle('element__like-button_active')
   })
 
-  elementPhoto.addEventListener('click', function () {
-    openPopupUniversal(popupZoom);
-    const popupZoomImages = popupZoom.querySelector('.popup__images-zoom');
-    popupZoomImages.setAttribute('src', cardData.link);
-    popupZoomImages.setAttribute('alt', cardData.name);
-    const popupZoomCaption = popupZoom.querySelector('.popup__caption-zoom');
-    popupZoomCaption.textContent = cardData.name;
-
-  });
+  elementPhoto.addEventListener('click', () => handleOpenPopupFullImage(cardData));
 
   return newElement;
 
