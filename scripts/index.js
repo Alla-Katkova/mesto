@@ -61,7 +61,7 @@ const popupZoomImages = popupZoom.querySelector('.popup__images-zoom');
 const popupZoomCaption = popupZoom.querySelector('.popup__caption-zoom');
 
 const popupList = document.querySelectorAll('.popup')
-console.log(popupList);
+//console.log(popupList);
 
 
 
@@ -86,7 +86,12 @@ initialCards.forEach(function (cardData) {
 
 
 function openPopupUniversal(element) {
-  element.classList.remove("popup_hidden")
+  element.classList.remove("popup_hidden");
+  document.addEventListener('keydown', function (event) {
+    if (event.key === "Escape") {
+      element.classList.add('popup_hidden')
+    }
+  })
 }
 
 function openPopupProfileEdit() {
@@ -111,16 +116,13 @@ function closePopupUniversal(element) {
   element.classList.add("popup_hidden");
 }
 
-popupList.forEach(function(popupItem) {
-  popupItem.addEventListener('click', function(event){
+popupList.forEach(function (popupItem) {
+  popupItem.addEventListener('click', function (event) {
     if (event.target === event.currentTarget) {
       closePopupUniversal(popupItem);
     }
   })
-} 
-)
-
-
+})
 
 profileButtonEdit.addEventListener("click", openPopupProfileEdit);
 popupCloseButtonProfileEdit.addEventListener("click", function () {
@@ -164,7 +166,7 @@ function createCard(cardData) {
     event.target.classList.toggle('element__like-button_active')
   })
 
-  elementPhoto.addEventListener('click', function() {
+  elementPhoto.addEventListener('click', function () {
     handleOpenPopupFullImage(cardData)
   });
 
