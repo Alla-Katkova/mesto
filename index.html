@@ -48,7 +48,7 @@
         <input type="text" class="popup__input popup__input_type_name" placeholder="Имя" id="user-name" name="user-name"
           required>
         <input type="text" class="popup__input popup__input_type_status" placeholder="Чем вы занимаетесь?"
-          id="user-status" name="user-status">
+          id="user-status" name="user-status" required>
         <button type="submit" aria-label="save" class="popup__save-button">Сохранить</button>
       </form>
     </div>
@@ -59,8 +59,8 @@
       <button type="button" aria-label="close" class="popup__close-button popup__close-button-add"></button>
       <h2 class="popup__heading">Новое место</h2>
       <form class="popup__form popup__form_add" name="popupForm">
-        <input type="text" class="popup__input popup__input_type_place-name" placeholder="Название">
-        <input type="url" class="popup__input popup__input_type_photo-link" placeholder="Ссылка на картинку">
+        <input type="text" class="popup__input popup__input_type_place-name" placeholder="Название" required>
+        <input type="url" class="popup__input popup__input_type_photo-link" placeholder="Ссылка на картинку" required>
         <button type="submit" aria-label="save" class="popup__save-button popup__save-button_add">Создать</button>
       </form>
     </div>

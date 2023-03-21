@@ -60,6 +60,13 @@ const elements = document.querySelector('.elements')
 const popupZoomImages = popupZoom.querySelector('.popup__images-zoom');
 const popupZoomCaption = popupZoom.querySelector('.popup__caption-zoom');
 
+const popupList = document.querySelectorAll('.popup')
+console.log(popupList);
+
+
+
+
+
 /* function openPopup() {
 popupProfileEdit.classList.remove("popup_hidden")
 //Информация из профиля пользователя загружается в соответствующие поля
@@ -104,6 +111,17 @@ function closePopupUniversal(element) {
   element.classList.add("popup_hidden");
 }
 
+popupList.forEach(function(popupItem) {
+  popupItem.addEventListener('click', function(event){
+    if (event.target === event.currentTarget) {
+      closePopupUniversal(popupItem);
+    }
+  })
+} 
+)
+
+
+
 profileButtonEdit.addEventListener("click", openPopupProfileEdit);
 popupCloseButtonProfileEdit.addEventListener("click", function () {
   closePopupUniversal(popupProfileEdit)
@@ -146,10 +164,11 @@ function createCard(cardData) {
     event.target.classList.toggle('element__like-button_active')
   })
 
-  elementPhoto.addEventListener('click', () => handleOpenPopupFullImage(cardData));
+  elementPhoto.addEventListener('click', function() {
+    handleOpenPopupFullImage(cardData)
+  });
 
   return newElement;
-
 }
 
 
