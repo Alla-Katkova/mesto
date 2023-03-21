@@ -201,7 +201,8 @@ function handleDeleteButtonClick(event) {
 
 const popupCloseButtonZoom = popupZoom.querySelector('.popup__close-button-zoom');
 popupCloseButtonZoom.addEventListener("click", function () {
-  closePopupUniversal(popupZoom)
+  closePopupUniversal(popupZoom);
+  popupZoom.reset();
 });
 
 
