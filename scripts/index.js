@@ -25,21 +25,18 @@ const initialCards = [
   }
 ];
 
-//открытие и закрытие поп ап
+
 const profileButtonEdit = document.querySelector(".profile__button-edit");
 const profileButtonAdd = document.querySelector(".profile__button-add");
-//console.log('добавления кнопка: ', profileButtonAdd);
 
-//console.log('редакт кнопка: ', profileButtonEdit);
 const popupProfileEdit = document.querySelector(".popup");
 const popupAdd = document.querySelector(".popup-add")
 
 const popupCloseButtonProfileEdit = popupProfileEdit.querySelector(".popup__close-button");
 const popupCloseButtonAdd = popupAdd.querySelector(".popup__close-button-add");
-//console.log('закрытия кнопка: ', popupCloseButtonAdd);
-//console.log('закр кнопка: ', popupCloseButtonProfileEdit);
 
-/*popup__save-button  кнопка сохранения*/
+
+
 const nameInput = popupProfileEdit.querySelector(".popup__input_type_name");
 //console.log("поле имени: ", nameInput);
 const statusInput = popupProfileEdit.querySelector(".popup__input_type_status");
@@ -63,20 +60,6 @@ const popupZoomCaption = popupZoom.querySelector('.popup__caption-zoom');
 const popupList = document.querySelectorAll('.popup')
 //console.log(popupList);
 
-
-
-
-
-/* function openPopup() {
-popupProfileEdit.classList.remove("popup_hidden")
-//Информация из профиля пользователя загружается в соответствующие поля
-nameInput.value = profileName.textContent;
-statusInput.value = profileStatus.textContent;
-}
-
-function openPopupAdd() {
-popupAdd.classList.remove("popup_hidden")
-} */
 
 initialCards.forEach(function (cardData) {
   const newElement = createCard(cardData);
@@ -103,14 +86,6 @@ function openPopupProfileEdit() {
 function openPopupAdd() {
   openPopupUniversal(popupAdd);
 }
-/* function closePopupAdd() {
-popupAdd.classList.add("popup_hidden")
-}
-
-
-function closePopup() {
-ProfileEdit.classList.add("popup_hidden")
-} */
 
 function closePopupUniversal(element) {
   element.classList.add("popup_hidden");
@@ -204,5 +179,12 @@ popupCloseButtonZoom.addEventListener("click", function () {
   closePopupUniversal(popupZoom);
   popupZoom.reset();
 });
+
+
+
+
+
+
+
 
 
