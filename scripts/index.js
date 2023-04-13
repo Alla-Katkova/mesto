@@ -69,10 +69,10 @@ initialCards.forEach(function (cardData) {
 
 
 function openPopupUniversal(element) {
-  element.classList.remove("popup_hidden");
+  element.classList.remove("popup_opened");
   document.addEventListener('keydown', function (event) {
     if (event.key === "Escape") {
-      element.classList.add('popup_hidden')
+      element.classList.add('popup_opened')
     }
   })
 }
@@ -88,7 +88,7 @@ function openPopupAdd() {
 }
 
 function closePopupUniversal(element) {
-  element.classList.add("popup_hidden");
+  element.classList.add("popup_opened");
 }
 
 popupList.forEach(function (popupItem) {
