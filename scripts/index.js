@@ -72,7 +72,7 @@ function openPopupUniversal(element) {
   element.classList.remove("popup_opened");
   document.addEventListener('keydown', function (event) {
     if (event.key === "Escape") {
-      element.classList.add('popup_opened')
+      closePopupUniversal(element)
     }
   })
 }

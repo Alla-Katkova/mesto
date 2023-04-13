@@ -73,7 +73,3 @@ const disableButton = (button, { inactiveButtonClass, activeButtonClass, ...rest
 
 enableValidation(validationConfig);
 
-function resetDisabledAddForm(popupFormAdd, {inactiveButtonClass, activeButtonClass}) {
-  popupFormAdd.reset();
-  disableButton()
-}
