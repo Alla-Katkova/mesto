@@ -162,6 +162,19 @@ function submitFormAdd(event) {
   closePopupUniversal(popupAdd)
 
   popupFormAdd.reset();
+
+  resetAddForm()
+}
+
+function resetAddForm() {
+  const saveButtonFormAdd = popupFormAdd.querySelector('.popup__save-button_add')
+  popupFormAdd.reset();
+  disableButton(saveButtonFormAdd,
+    {
+      inactiveButtonClass: validationConfig.inactiveButtonClass,
+      activeButtonClass: validationConfig.activeButtonClass
+    }
+  )
 }
 
 popupFormProfileEdit.addEventListener("submit", submitFormProfileEdit);
