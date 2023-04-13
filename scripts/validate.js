@@ -3,8 +3,6 @@ const validationConfig = {
   inputSelector: '.popup__input',
   submitButtonSelector: '.popup__save-button',
   inactiveButtonClass: 'popup__save-button_invalid',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__error_visible',
   activeButtonClass: 'popup__save-button_valid'
 }
 
@@ -12,17 +10,17 @@ const validationConfig = {
 const setEventListeners = (formToValidity, { inputSelector, submitButtonSelector, inactiveButtonClass, activeButtonClass, ...rest }) => {
   const formInputs = Array.from(formToValidity.querySelectorAll(inputSelector))
   const formButton = formToValidity.querySelector(submitButtonSelector)
-console.log('activeButtonClass ' + activeButtonClass)
-  disableButton(formButton, {inactiveButtonClass, activeButtonClass})
+
+  disableButton(formButton, { inactiveButtonClass, activeButtonClass })
   formInputs.forEach(input => {
     input.addEventListener('input', () => {
       showErrorIfInvalid(input)
       if (hasInvalidInput(formInputs)) {
-        disableButton(formButton, {inactiveButtonClass, activeButtonClass})
-        //console.log('invalid')
+        disableButton(formButton, { inactiveButtonClass, activeButtonClass })
+
       } else {
-        enableButton(formButton, {inactiveButtonClass, activeButtonClass})
-        //console.log('valid')
+        enableButton(formButton, { inactiveButtonClass, activeButtonClass })
+
       }
     })
   })
@@ -37,12 +35,12 @@ const enableValidation = ({ formSelector, ...rest }) => {
       event.preventDefault()
     })
     setEventListeners(form, rest)
-    //console.log(rest)
+
   })
 
 }
 
-const showErrorIfInvalid= (input) => {
+const showErrorIfInvalid = (input) => {
   const currentInputErrorContainer = document.querySelector(`#${input.id}-error`) //тут связываем наш span ошибки с инпутом - c помощью щаблона (input id + -error)
 
   if (input.checkValidity()) {   // тут функция checkValidity () будет сверять с данными длины из html, можно сделать через цикл for и длину массива
@@ -64,20 +62,12 @@ const enableButton = (button, { inactiveButtonClass, activeButtonClass, ...rest 
   button.classList.remove(inactiveButtonClass)
   button.classList.add(activeButtonClass)
   button.removeAttribute('disabled', true)
-  console.log('enabled inactiveButtonClass')
-  console.log(inactiveButtonClass)
-  //console.log(button)
 }
 
 const disableButton = (button, { inactiveButtonClass, activeButtonClass, ...rest }) => {
   button.classList.add(inactiveButtonClass)
   button.classList.remove(activeButtonClass)
   button.setAttribute('disabled', true)
-  //console.log('disabled')
-  // console.log(button)
-  console.log('disabled inactiveButtonClass')
-  console.log(inactiveButtonClass)
-  console.log(activeButtonClass)
 }
 
 

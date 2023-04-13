@@ -3,3 +3,8 @@
   opacity: 0.2;
 
 }
+
+.popup__save-button_invalid:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
