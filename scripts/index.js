@@ -88,12 +88,13 @@ function openPopupAdd() {
 function closePopupUniversal() {
   if(currentlyOpenedPopup===null) {
     console.error('произошла ошибка currentlyOpenedPopup===null) У нее нет класса')
+    console.trace()
   }
   currentlyOpenedPopup.classList.add("popup_hidden");
   document.removeEventListener('keydown', closePopupByEscape);
   currentlyOpenedPopup = null;
 }
-
+//закрытие на овелей
 popupList.forEach(function (popupItem) {
   popupItem.addEventListener('click', function (event) {
     if (event.target === event.currentTarget) {
@@ -120,10 +121,11 @@ function submitFormProfileEdit(event) {
 }
 
 function handleOpenPopupFullImage(data) {
-  openPopupUniversal(popupZoom);
+
   popupZoomImages.setAttribute('src', data.link);
   popupZoomImages.setAttribute('alt', data.name);
   popupZoomCaption.textContent = data.name;
+  openPopupUniversal(popupZoom);
 }
 
 function createCard(cardData) {
@@ -188,7 +190,9 @@ function handleDeleteButtonClick(event) {
 const popupCloseButtonZoom = popupZoom.querySelector('.popup__close-button-zoom');
 popupCloseButtonZoom.addEventListener("click", function () {
   closePopupUniversal();
-  //popupZoom.reset();
+  popupZoomImages.setAttribute('src', '');
+  popupZoomImages.setAttribute('alt', '');
+  popupZoomCaption.textContent = '';
 });
 
 
