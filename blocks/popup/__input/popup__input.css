@@ -16,17 +16,6 @@
   padding-bottom: 13px;
 }
 
-.popup__input:invalid {
-  border-bottom: 1px solid red;
-  /* красная рамка для некорректных данных */
-}
-
-.popup__input:valid {
-  border-bottom: 1px solid rgb(0, 0, 0, 0.2);
-  /* красная рамка для корректных данных */
-}
-
-
 @media screen and (min-width: 1280px) {
   .popup__input {
     border-radius: 0;

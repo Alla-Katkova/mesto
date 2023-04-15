@@ -41,13 +41,25 @@ const enableValidation = ({ formSelector, ...rest }) => {
 }
 
 const showErrorIfInvalid = (input) => {
-  const currentInputErrorContainer = document.querySelector(`#${input.id}-error`) //тут связываем наш span ошибки с инпутом - c помощью щаблона (input id + -error)
-
-  if (input.checkValidity()) {   // тут функция checkValidity () будет сверять с данными длины из html, можно сделать через цикл for и длину массива
-    currentInputErrorContainer.textContent = ''
+  if (input.checkValidity()) {   
+    hideInputError(input)
   } else {
-    currentInputErrorContainer.textContent = input.validationMessage //тут говорим , что надо добавить текст ошибки 
-  }
+    showInputError(input)
+}
+}
+
+const showInputError = (input) => {
+  const currentInputErrorContainer = document.querySelector(`#${input.id}-error`);   //тут связываем наш span ошибки с инпутом - c помощью щаблона (input id + -error)
+  currentInputErrorContainer.textContent = input.validationMessage;  //тут говорим , что надо добавить текст ошибки 
+  input.classList.add('popup__input_type_error');
+}
+
+  
+
+const hideInputError = (input) => {
+  const currentInputErrorContainer = document.querySelector(`#${input.id}-error`);
+  currentInputErrorContainer.textContent = '' // тут функция checkValidity () будет сверять с данными длины из html, можно сделать через цикл for и длину массива
+  input.classList.remove('popup__input_type_error');
 }
 
 // функция для возможности применения enableButton и disableButton
