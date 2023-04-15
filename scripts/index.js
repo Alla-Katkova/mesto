@@ -61,14 +61,15 @@ initialCards.forEach(function (cardData) {
   elements.append(newElement);
 });
 
-
+function closePopupByEscape(event) {
+  if (event.key === "Escape") {
+    closePopupUniversal(element)
+  }
+}
 
 function openPopupUniversal(element) {
   element.classList.remove("popup_hidden");
-  document.addEventListener('keydown', function(event) {
-    if (event.key === "Escape") 
-    closePopupUniversal(element)
-  }) 
+  document.addEventListener('keydown', closePopupByEscape)
 }
 
 function openPopupProfileEdit() {
@@ -83,11 +84,7 @@ function openPopupAdd() {
 
 function closePopupUniversal(element) {
   element.classList.add("popup_hidden");
-  document.removeEventListener('keydown', function (event) {
-    if (event.key === "Escape") {
-      closePopupUniversal(element)
-    }
-  })
+  document.removeEventListener('keydown', closePopupByEscape)
 }
 
 popupList.forEach(function (popupItem) {
