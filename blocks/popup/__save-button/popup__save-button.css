@@ -11,12 +11,20 @@
   height: 46px;
   color: #FFFFFF;
   border: 0px;
-  margin-top: 22px;
+  margin-top: 45px;
 }
 
-.popup__save-button :hover {
+.popup__save-button:hover {
   cursor: pointer;
+  opacity: 0.8;
 }
+
+/*
+.popup__save-button:not(:hover) {
+  cursor: pointer;
+  opacity: 0.8;
+}
+*/
 
 @media screen and (min-width: 1280px) {
   .popup__save-button {
@@ -26,5 +34,6 @@
     font-size: 18px;
     line-height: 22px;
     padding: 0px;
+    margin-top: 48px;
   }
 }

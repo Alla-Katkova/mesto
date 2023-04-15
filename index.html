@@ -40,7 +40,7 @@
     <p class="footer__copyright">© 2020 Mesto Russia</p>
   </footer>
 
-  <section class="popup popup_opened">
+  <section class="popup popup_hidden">
     <div class="popup__container">
       <button type="button" aria-label="close" class="popup__close-button"></button>
       <h2 class="popup__heading">Редактировать профиль</h2>
@@ -51,12 +51,12 @@
         <input type="text" class="popup__input popup__input_type_status popup__input_type_error" placeholder="О себе"
           id="user-status" name="user-status" minlength="2" maxlength="200" required>
           <span id="user-status-error" class="popup__error-visible"></span>
-          <button type="submit" aria-label="save" class="popup__save-button popup__save-button_valid popup__save-button_invalid" disabled>Сохранить</button>
+          <button type="submit" aria-label="save" class="popup__save-button popup__save-button_invalid" disabled>Сохранить</button>
       </form>
     </div>
   </section>
 
-  <section class="popup popup_opened popup-add">
+  <section class="popup popup_hidden popup-add">
     <div class="popup__container">
       <button type="button" aria-label="close" class="popup__close-button popup__close-button-add"></button>
       <h2 class="popup__heading">Новое место</h2>
@@ -70,7 +70,7 @@
     </div>
   </section>
 
-  <section class="popup popup_opened popup-zoom">
+  <section class="popup popup_hidden popup-zoom">
     <div class="popup__container-zoom">
       <button type="button" aria-label="close" class="popup__close-button popup__close-button-zoom"></button>
       <img class="popup__images-zoom">

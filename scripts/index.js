@@ -54,6 +54,7 @@ const popupZoomCaption = popupZoom.querySelector('.popup__caption-zoom');
 
 const popupList = document.querySelectorAll('.popup')
 
+const cardTemplate = document.querySelector('#elementTemplate').content.querySelector('.element')
 
 initialCards.forEach(function (cardData) {
   const newElement = createCard(cardData);
@@ -61,13 +62,13 @@ initialCards.forEach(function (cardData) {
 });
 
 
+
 function openPopupUniversal(element) {
-  element.classList.remove("popup_opened");
-  document.addEventListener('keydown', function (event) {
-    if (event.key === "Escape") {
-      closePopupUniversal(element)
-    }
-  })
+  element.classList.remove("popup_hidden");
+  document.addEventListener('keydown', function(event) {
+    if (event.key === "Escape") 
+    closePopupUniversal(element)
+  }) 
 }
 
 function openPopupProfileEdit() {
@@ -81,7 +82,7 @@ function openPopupAdd() {
 }
 
 function closePopupUniversal(element) {
-  element.classList.add("popup_opened");
+  element.classList.add("popup_hidden");
   document.removeEventListener('keydown', function (event) {
     if (event.key === "Escape") {
       closePopupUniversal(element)
@@ -122,7 +123,7 @@ function handleOpenPopupFullImage(data) {
 }
 
 function createCard(cardData) {
-  const newElement = document.querySelector('#elementTemplate').content.querySelector('.element').cloneNode(true);
+  const newElement = cardTemplate.cloneNode(true);
   const elementPhoto = newElement.querySelector('.element__photo');
   elementPhoto.setAttribute('src', cardData.link);
   elementPhoto.setAttribute('alt', cardData.name);
