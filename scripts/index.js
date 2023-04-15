@@ -56,7 +56,7 @@ const popupList = document.querySelectorAll('.popup')
 
 const cardTemplate = document.querySelector('#elementTemplate').content.querySelector('.element')
 
-let currentlyOpenedPopup = null;
+//let currentlyOpenedPopup = null;
 
 initialCards.forEach(function (cardData) {
   const newElement = createCard(cardData);
@@ -70,8 +70,8 @@ function closePopupByEscape(event) {
 }
 
 function openPopupUniversal(popupElement) {
-  popupElement.classList.remove("popup_hidden");
-  currentlyOpenedPopup = popupElement;
+  popupElement.classList.add("popup_opened");
+ // currentlyOpenedPopup = popupElement;
   document.addEventListener('keydown', closePopupByEscape);
 }
 
@@ -86,13 +86,11 @@ function openPopupAdd() {
 }
 
 function closePopupUniversal() {
-  if(currentlyOpenedPopup===null) {
-    console.error('произошла ошибка currentlyOpenedPopup===null) У нее нет класса')
-    console.trace()
-  }
-  currentlyOpenedPopup.classList.add("popup_hidden");
+  const openedPopup = document.querySelector('.popup_opened')
+  console.log(openedPopup)
+  openedPopup.classList.remove("popup_opened");
   document.removeEventListener('keydown', closePopupByEscape);
-  currentlyOpenedPopup = null;
+  
 }
 //закрытие на овелей
 popupList.forEach(function (popupItem) {
