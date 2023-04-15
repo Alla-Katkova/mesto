@@ -56,6 +56,8 @@ const popupList = document.querySelectorAll('.popup')
 
 const cardTemplate = document.querySelector('#elementTemplate').content.querySelector('.element')
 
+let currentlyOpenedPopup = null;
+
 initialCards.forEach(function (cardData) {
   const newElement = createCard(cardData);
   elements.append(newElement);
@@ -63,13 +65,14 @@ initialCards.forEach(function (cardData) {
 
 function closePopupByEscape(event) {
   if (event.key === "Escape") {
-    closePopupUniversal(element)
+    closePopupUniversal()
   }
 }
 
-function openPopupUniversal(element) {
-  element.classList.remove("popup_hidden");
-  document.addEventListener('keydown', closePopupByEscape)
+function openPopupUniversal(popupElement) {
+  popupElement.classList.remove("popup_hidden");
+  currentlyOpenedPopup = popupElement;
+  document.addEventListener('keydown', closePopupByEscape);
 }
 
 function openPopupProfileEdit() {
@@ -82,9 +85,13 @@ function openPopupAdd() {
   openPopupUniversal(popupAdd);
 }
 
-function closePopupUniversal(element) {
-  element.classList.add("popup_hidden");
-  document.removeEventListener('keydown', closePopupByEscape)
+function closePopupUniversal() {
+  if(currentlyOpenedPopup===null) {
+    console.error('произошла ошибка currentlyOpenedPopup===null) У нее нет класса')
+  }
+  currentlyOpenedPopup.classList.add("popup_hidden");
+  document.removeEventListener('keydown', closePopupByEscape);
+  currentlyOpenedPopup = null;
 }
 
 popupList.forEach(function (popupItem) {
