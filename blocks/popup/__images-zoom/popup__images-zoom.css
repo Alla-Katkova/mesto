@@ -1,13 +1,7 @@
 .popup__images-zoom {
   max-width: 75vw;
   object-fit: cover;
-  height: 100%;
+  max-height: 75vh;
   
 }
 
-@media screen and (min-width: 1280px) {
-  .popup__images-zoom {
-    max-height: 75vh;
-    max-width: 75vw;
-  }
-}
