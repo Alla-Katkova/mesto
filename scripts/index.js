@@ -25,7 +25,6 @@ const initialCards = [
   }
 ];
 
-
 const profileButtonEdit = document.querySelector(".profile__button-edit");
 const profileButtonAdd = document.querySelector(".profile__button-add");
 
@@ -35,17 +34,13 @@ const popupAdd = document.querySelector(".popup-add")
 const popupCloseButtonProfileEdit = popupProfileEdit.querySelector(".popup__close-button");
 const popupCloseButtonAdd = popupAdd.querySelector(".popup__close-button-add");
 
-
-
 const nameInput = popupProfileEdit.querySelector(".popup__input_type_name");
-//console.log("поле имени: ", nameInput);
 const statusInput = popupProfileEdit.querySelector(".popup__input_type_status");
-//console.log("поле статуса: ", statusInput);
+
 const popupFormProfileEdit = popupProfileEdit.querySelector(".popup__form");
 const profileName = document.querySelector(".profile__name");
-//console.log("профиль имя " , profileName);
+
 const profileStatus = document.querySelector(".profile__status");
-//console.log("профиль статус " , profileStatus);
 
 const placeNameInput = popupAdd.querySelector(".popup__input_type_place-name");
 const photoLinkInput = popupAdd.querySelector(".popup__input_type_photo-link");
@@ -58,12 +53,10 @@ const popupZoomImages = popupZoom.querySelector('.popup__images-zoom');
 const popupZoomCaption = popupZoom.querySelector('.popup__caption-zoom');
 
 const popupList = document.querySelectorAll('.popup')
-//console.log(popupList);
 
 
 initialCards.forEach(function (cardData) {
   const newElement = createCard(cardData);
-
   elements.append(newElement);
 });
 
@@ -89,6 +82,11 @@ function openPopupAdd() {
 
 function closePopupUniversal(element) {
   element.classList.add("popup_opened");
+  document.removeEventListener('keydown', function (event) {
+    if (event.key === "Escape") {
+      closePopupUniversal(element)
+    }
+  })
 }
 
 popupList.forEach(function (popupItem) {
@@ -111,7 +109,6 @@ popupCloseButtonAdd.addEventListener("click", function () {
 
 function submitFormProfileEdit(event) {
   event.preventDefault();
-  //console.log(event);
   profileName.textContent = nameInput.value;
   profileStatus.textContent = statusInput.value;
   closePopupUniversal(popupProfileEdit)
@@ -123,7 +120,6 @@ function handleOpenPopupFullImage(data) {
   popupZoomImages.setAttribute('alt', data.name);
   popupZoomCaption.textContent = data.name;
 }
-
 
 function createCard(cardData) {
   const newElement = document.querySelector('#elementTemplate').content.querySelector('.element').cloneNode(true);
@@ -148,7 +144,6 @@ function createCard(cardData) {
   return newElement;
 }
 
-
 function submitFormAdd(event) {
   event.preventDefault();
 
@@ -161,9 +156,7 @@ function submitFormAdd(event) {
   elements.prepend(newElement);
   closePopupUniversal(popupAdd)
 
-  popupFormAdd.reset();
-
-  resetAddForm()
+  resetAddForm();
 }
 
 function resetAddForm() {
@@ -190,7 +183,7 @@ function handleDeleteButtonClick(event) {
 const popupCloseButtonZoom = popupZoom.querySelector('.popup__close-button-zoom');
 popupCloseButtonZoom.addEventListener("click", function () {
   closePopupUniversal(popupZoom);
-  popupZoom.reset();
+  //popupZoom.reset();
 });
 
 
