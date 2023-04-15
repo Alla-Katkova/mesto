@@ -87,7 +87,6 @@ function openPopupAdd() {
 
 function closePopupUniversal() {
   const openedPopup = document.querySelector('.popup_opened')
-  console.log(openedPopup)
   openedPopup.classList.remove("popup_opened");
   document.removeEventListener('keydown', closePopupByEscape);
   
