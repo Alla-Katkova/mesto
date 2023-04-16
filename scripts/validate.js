@@ -3,18 +3,17 @@ const validationConfig = {
   inputSelector: '.popup__input',
   submitButtonSelector: '.popup__save-button',
   inactiveButtonClass: 'popup__save-button_invalid',
-
+  inputErrorClass: 'popup__input_type_error'
 }
 
 
-const setEventListeners = (formToValidity, { inputSelector, submitButtonSelector, inactiveButtonClass, ...rest }) => {
+const setEventListeners = (formToValidity, { inputSelector, submitButtonSelector, inactiveButtonClass, inputErrorClass, ...rest }) => {
   const formInputs = Array.from(formToValidity.querySelectorAll(inputSelector))
   const formButton = formToValidity.querySelector(submitButtonSelector)
-
-  disableButton(formButton, { inactiveButtonClass })
+  disableButton(formButton, { inactiveButtonClass})
   formInputs.forEach(input => {
     input.addEventListener('input', () => {
-      showErrorIfInvalid(input)
+      showErrorIfInvalid(input, inputErrorClass)
       if (hasInvalidInput(formInputs)) {
         disableButton(formButton, { inactiveButtonClass})
 
@@ -35,31 +34,30 @@ const enableValidation = ({ formSelector, ...rest }) => {
     //   event.preventDefault()
     // })
     setEventListeners(form, rest)
-
   })
 
 }
 
-const showErrorIfInvalid = (input) => {
+const showErrorIfInvalid = (input, inputErrorClass) => {
   if (input.checkValidity()) {   
-    hideInputError(input)
+    hideInputError(input, inputErrorClass)
   } else {
-    showInputError(input)
+    showInputError(input, inputErrorClass)
 }
 }
 
-const showInputError = (input) => {
+const showInputError = (input, inputErrorClass) => {
   const currentInputErrorContainer = document.querySelector(`#${input.id}-error`);   //тут связываем наш span ошибки с инпутом - c помощью щаблона (input id + -error)
   currentInputErrorContainer.textContent = input.validationMessage;  //тут говорим , что надо добавить текст ошибки 
-  input.classList.add('popup__input_type_error');
+  input.classList.add(inputErrorClass);
 }
 
   
 
-const hideInputError = (input) => {
+const hideInputError = (input, inputErrorClass) => {
   const currentInputErrorContainer = document.querySelector(`#${input.id}-error`);
   currentInputErrorContainer.textContent = '' // тут функция checkValidity () будет сверять с данными длины из html, можно сделать через цикл for и длину массива
-  input.classList.remove('popup__input_type_error');
+  input.classList.remove(inputErrorClass);
 }
 
 // функция для возможности применения enableButton и disableButton
