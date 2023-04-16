@@ -95,18 +95,18 @@ function closePopupUniversal() {
 popupList.forEach(function (popupItem) {
   popupItem.addEventListener('click', function (event) {
     if (event.target === event.currentTarget) {
-      closePopupUniversal();
+      closePopupUniversal(popupItem);
     }
   })
 })
 
 profileButtonEdit.addEventListener("click", openPopupProfileEdit);
 popupCloseButtonProfileEdit.addEventListener("click", function () {
-  closePopupUniversal()
+  closePopupUniversal(popupProfileEdit)
 });
 profileButtonAdd.addEventListener("click", openPopupAdd);
 popupCloseButtonAdd.addEventListener("click", function () {
-  closePopupUniversal()
+  closePopupUniversal(popupAdd)
 });
 
 
@@ -114,7 +114,7 @@ function submitFormProfileEdit(event) {
   event.preventDefault();
   profileName.textContent = nameInput.value;
   profileStatus.textContent = statusInput.value;
-  closePopupUniversal()
+  closePopupUniversal(popupProfileEdit)
 }
 
 function handleOpenPopupFullImage(data) {
@@ -158,7 +158,7 @@ function submitFormAdd(event) {
 
   const newElement = createCard(cardData);
   elements.prepend(newElement);
-  closePopupUniversal()
+  closePopupUniversal(popupAdd)
 
   resetAddForm();
 }
@@ -186,7 +186,7 @@ function handleDeleteButtonClick(event) {
 
 const popupCloseButtonZoom = popupZoom.querySelector('.popup__close-button-zoom');
 popupCloseButtonZoom.addEventListener("click", function () {
-  closePopupUniversal();
+  closePopupUniversal(popupZoom);
   popupZoomImages.setAttribute('src', '');
   popupZoomImages.setAttribute('alt', '');
   popupZoomCaption.textContent = '';
