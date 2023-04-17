@@ -63,15 +63,15 @@ initialCards.forEach(function (cardData) {
   elements.append(newElement);
 });
 
-function closePopupByEscape(event, openedPopup) {
+function closePopupByEscape(event) {
   if (event.key === "Escape") {
+    const openedPopup = document.querySelector('.popup_opened')
     closePopupUniversal(openedPopup)
   }
 }
 
 function openPopupUniversal(popupElement) {
   popupElement.classList.add("popup_opened");
- // currentlyOpenedPopup = popupElement;
   document.addEventListener('keydown', closePopupByEscape);
 }
 
@@ -86,8 +86,9 @@ function openPopupAdd() {
 }
 
 function closePopupUniversal(element) {
-  const openedPopup = document.querySelector('.popup_opened')
-  openedPopup.classList.remove("popup_opened");
+  //const openedPopup = document.querySelector('.popup_opened')
+ // openedPopup.classList.remove("popup_opened");
+  element.classList.remove("popup_opened");
   document.removeEventListener('keydown', closePopupByEscape);
   
 }
