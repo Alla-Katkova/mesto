@@ -63,9 +63,9 @@ initialCards.forEach(function (cardData) {
   elements.append(newElement);
 });
 
-function closePopupByEscape(event) {
+function closePopupByEscape(event, openedPopup) {
   if (event.key === "Escape") {
-    closePopupUniversal()
+    closePopupUniversal(openedPopup)
   }
 }
 
