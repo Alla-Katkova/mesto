@@ -92,10 +92,22 @@ class Card {
   _setEventListeners() {
     const likeButton = this._element.querySelector('.element__like-button');
     likeButton.addEventListener('click', this._handleLikeToggle)
+
+    const deleteButton = this._element.querySelector('.element__delete-button');
+    deleteButton.addEventListener('click', this._handleDeleteButtonClick);
+
   }
+
   _handleLikeToggle(event) {
     event.target.classList.toggle('element__like-button_active')
   }
+
+  _handleDeleteButtonClick(event) {
+    const button = event.target;
+    const elementToDelete = button.closest('.element');
+    elementToDelete.remove();
+  }
+
 
 
 
@@ -197,8 +209,8 @@ function createCard(cardData) {
   //   const elementCaption = newElement.querySelector('.element__caption');
   //   elementCaption.textContent = cardData.name;
 
-  const deleteButton = newElement.querySelector('.element__delete-button');
-  deleteButton.addEventListener('click', handleDeleteButtonClick);
+  // const deleteButton = newElement.querySelector('.element__delete-button');
+  // deleteButton.addEventListener('click', handleDeleteButtonClick);
 
   // const likeButton = newElement.querySelector('.element__like-button');
   // likeButton.addEventListener('click', function (event) {
@@ -242,11 +254,11 @@ popupFormProfileEdit.addEventListener("submit", submitFormProfileEdit);
 popupFormAdd.addEventListener("submit", submitFormAdd);
 
 
-function handleDeleteButtonClick(event) {
-  const button = event.target;
-  const elementToDelete = button.closest('.element');
-  elementToDelete.remove();
-}
+// function handleDeleteButtonClick(event) {
+//   const button = event.target;
+//   const elementToDelete = button.closest('.element');
+//   elementToDelete.remove();
+// }
 
 const popupCloseButtonZoom = popupZoom.querySelector('.popup__close-button-zoom');
 popupCloseButtonZoom.addEventListener("click", function () {
