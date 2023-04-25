@@ -54,6 +54,8 @@ const popupZoomCaption = popupZoom.querySelector('.popup__caption-zoom');
 
 const popupList = document.querySelectorAll('.popup')
 
+//const cardTemplate = document.querySelector('#elementTemplate').content.querySelector('.element')
+
 
 class Card {
   constructor(data, templateSelector) {
@@ -64,28 +66,49 @@ class Card {
   _getTemplate() {
     const cardTemplate = document.querySelector(this._templateSelector).content.querySelector('.element')
     const newElement = cardTemplate.cloneNode(true);
-  
+
     return newElement
   }
 
   generateCard() {
-  // Запишем разметку в приватное поле _element. 
-  // Так у других элементов появится доступ к ней.
+    // Запишем разметку в приватное поле _element. 
+    // Так у других элементов появится доступ к ней.
     this._element = this._getTemplate();
+
+    this._setEventListeners();
+
     const elementPhoto = this._element.querySelector('.element__photo');
 
     //добавим данные 
-    elementPhoto.src=this._link;
+    elementPhoto.src = this._link;
     elementPhoto.setAttribute('alt', this._name);//можно поставить точку .alt равнозначно
     const elementCaption = this._element.querySelector('.element__caption');
-    elementCaption.textContent=this._name;
+    elementCaption.textContent = this._name;
 
     //Вернём элемент наружу
     return this._element;
   }
+
+  _setEventListeners() {
+    const likeButton = this._element.querySelector('.element__like-button');
+    likeButton.addEventListener('click', this._handleLikeToggle)
+  }
+  _handleLikeToggle(event) {
+    event.target.classList.toggle('element__like-button_active')
+  }
+
+
+
+
+
+
+
+
+
+
 }
 
-initialCards.forEach((item) =>  {
+initialCards.forEach((item) => {
   const card = new Card(item, '#elementTemplate');
   const cardElement = card.generateCard();
 
@@ -95,14 +118,15 @@ initialCards.forEach((item) =>  {
 
 
 
-//const cardTemplate = document.querySelector('#elementTemplate').content.querySelector('.element')
 
-//let currentlyOpenedPopup = null;
 
-// initialCards.forEach(function (cardData) {
-//   const newElement = createCard(cardData);
-//   elements.append(newElement);
-// });
+
+
+
+
+
+
+
 
 function closePopupByEscape(event) {
   if (event.key === "Escape") {
@@ -127,11 +151,9 @@ function openPopupAdd() {
 }
 
 function closePopupUniversal(element) {
-  //const openedPopup = document.querySelector('.popup_opened')
- // openedPopup.classList.remove("popup_opened");
   element.classList.remove("popup_opened");
   document.removeEventListener('keydown', closePopupByEscape);
-  
+
 }
 //закрытие на овелей
 popupList.forEach(function (popupItem) {
@@ -168,20 +190,20 @@ function handleOpenPopupFullImage(data) {
 }
 
 function createCard(cardData) {
-//   const newElement = cardTemplate.cloneNode(true);
-//   const elementPhoto = newElement.querySelector('.element__photo');
-//   elementPhoto.setAttribute('src', cardData.link);
-//   elementPhoto.setAttribute('alt', cardData.name);
-//   const elementCaption = newElement.querySelector('.element__caption');
-//   elementCaption.textContent = cardData.name;
+  //   const newElement = cardTemplate.cloneNode(true);
+  //   const elementPhoto = newElement.querySelector('.element__photo');
+  //   elementPhoto.setAttribute('src', cardData.link);
+  //   elementPhoto.setAttribute('alt', cardData.name);
+  //   const elementCaption = newElement.querySelector('.element__caption');
+  //   elementCaption.textContent = cardData.name;
 
   const deleteButton = newElement.querySelector('.element__delete-button');
   deleteButton.addEventListener('click', handleDeleteButtonClick);
 
-  const likeButton = newElement.querySelector('.element__like-button');
-  likeButton.addEventListener('click', function (event) {
-    event.target.classList.toggle('element__like-button_active')
-  })
+  // const likeButton = newElement.querySelector('.element__like-button');
+  // likeButton.addEventListener('click', function (event) {
+  //   event.target.classList.toggle('element__like-button_active')
+  // })
 
   elementPhoto.addEventListener('click', function () {
     handleOpenPopupFullImage(cardData)
