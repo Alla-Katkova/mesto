@@ -96,6 +96,11 @@ class Card {
     const deleteButton = this._element.querySelector('.element__delete-button');
     deleteButton.addEventListener('click', this._handleDeleteButtonClick);
 
+    const elementPhoto = this._element.querySelector('.element__photo');
+    elementPhoto.addEventListener('click', () => { 
+      this._handleOpenPopupFullImage()
+
+    });
   }
 
   _handleLikeToggle(event) {
@@ -108,8 +113,14 @@ class Card {
     elementToDelete.remove();
   }
 
-
-
+  _handleOpenPopupFullImage() {
+    console.log(this._link)
+   
+    popupZoomImages.setAttribute('src', this._link);
+    popupZoomImages.setAttribute('alt', this._name);
+    popupZoomCaption.textContent = this._name;
+    openPopupUniversal(popupZoom);
+  }
 
 
 
@@ -193,13 +204,13 @@ function submitFormProfileEdit(event) {
   closePopupUniversal(popupProfileEdit)
 }
 
-function handleOpenPopupFullImage(data) {
+// function handleOpenPopupFullImage(data) {
 
-  popupZoomImages.setAttribute('src', data.link);
-  popupZoomImages.setAttribute('alt', data.name);
-  popupZoomCaption.textContent = data.name;
-  openPopupUniversal(popupZoom);
-}
+//   popupZoomImages.setAttribute('src', data.link);
+//   popupZoomImages.setAttribute('alt', data.name);
+//   popupZoomCaption.textContent = data.name;
+//   openPopupUniversal(popupZoom);
+// }
 
 function createCard(cardData) {
   //   const newElement = cardTemplate.cloneNode(true);
