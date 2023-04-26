@@ -1,15 +1,5 @@
 
-  const validationConfig = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__save-button',
-  inactiveButtonClass: 'popup__save-button_invalid',
-  inputErrorClass: 'popup__input_type_error'
-}
-
-const forms = Array.from(document.querySelectorAll(validationConfig.formSelector))
-      
-class FormValidator {
+export default class FormValidator {
   constructor(data, formToValidate) {
     this._formSelector = data.formSelector
     this._inputSelector = data.inputSelector
@@ -38,12 +28,10 @@ class FormValidator {
     })
   }
   
-  
   enableValidation = () => {
-      this._setEventListeners()
-    
+      this._setEventListeners()  
   }
-  
+
     _showErrorIfInvalid = (input) => {
     if (input.checkValidity()) {   
       this._hideInputError(input, this._inputErrorClass)
@@ -51,15 +39,11 @@ class FormValidator {
       this._showInputError(input, this._inputErrorClass)
   }
   }
-  
     _showInputError = (input) => {
     const currentInputErrorContainer = document.querySelector(`#${input.id}-error`);   //тут связываем наш span ошибки с инпутом - c помощью щаблона (input id + -error)
     currentInputErrorContainer.textContent = input.validationMessage;  //тут говорим , что надо добавить текст ошибки 
     input.classList.add(this._inputErrorClass);
   }
-  
-    
-  
     _hideInputError = (input) => {
     const currentInputErrorContainer = document.querySelector(`#${input.id}-error`);
     currentInputErrorContainer.textContent = '' // тут функция checkValidity () будет сверять с данными длины из html, можно сделать через цикл for и длину массива
@@ -70,7 +54,6 @@ class FormValidator {
   _hasInvalidInput = (formInputs) => {
     return formInputs.some(item => !item.validity.valid) // проверяем, есть ли какое-то поле, которые отвечает условию !item.validity.valid) ищем хотя бы одно не валидное поле
   }
-  
   
   //для того, чтобы кнопку сделать неактивной нужно убрать класс valid, добавить класс invalid и добавить атрибут disabled
   _enableButton = (button) => {
@@ -84,10 +67,8 @@ class FormValidator {
   }
   
 }
-forms.forEach((formElement) => {
-  const form = new FormValidator(validationConfig, formElement);
-  form.enableValidation();
-});
+
+
 
   //enableValidation() 
   //forms.forEach(form => {
