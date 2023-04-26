@@ -113,7 +113,6 @@ class Card {
   }
 
   _handleOpenPopupFullImage() {
- 
     popupZoomImages.setAttribute('src', this._link);
     popupZoomImages.setAttribute('alt', this._name);
     popupZoomCaption.textContent = this._name;
