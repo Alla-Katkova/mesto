@@ -72,5 +72,3 @@ export default class FormValidator {
     this._formButton.setAttribute("disabled", true);
   };
 }
-
-

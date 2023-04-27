@@ -72,12 +72,18 @@ const popupList = document.querySelectorAll('.popup')
 
 //const cardTemplate = document.querySelector('#elementTemplate').content.querySelector('.element')
 
-initialCards.forEach((cardData) => {
+function createCard(cardData) {
   const card = new Card(cardData, '#elementTemplate', handleOpenPopup);
   const cardElement = card.generateCard();
+  return cardElement;
+}
 
-  elements.append(cardElement);
+initialCards.forEach((cardData) => {
+  const newCard = createCard(cardData);
+  elements.append(newCard);
 });
+
+
 
 // const validators = {
 //   form1: new FormValidator(validationConfig, forms[0]),
@@ -167,9 +173,8 @@ function submitFormAdd(event) {
   };
 
 
-  const card = new Card(cardData, '#elementTemplate', handleOpenPopup);
-  const cardElement = card.generateCard();
-  elements.prepend(cardElement);
+  const newCard = createCard(cardData);
+  elements.prepend(newCard);
   closePopupUniversal(popupAdd);
   resetAddForm();
 }
@@ -201,12 +206,3 @@ popupCloseButtonZoom.addEventListener("click", function () {
   popupZoomImages.setAttribute('alt', '');
   popupZoomCaption.textContent = '';
 });
-
-
-
-
-
-
-
-
-
