@@ -4,6 +4,7 @@ export default class Card {
     this._link = data.link;
     this._templateSelector = templateSelector;
   }
+
   _getTemplate() {
     const cardTemplate = document.querySelector(this._templateSelector).content.querySelector('.element')
     const newElement = cardTemplate.cloneNode(true);
@@ -14,15 +15,14 @@ export default class Card {
   generateCard() {
     // Запишем разметку в приватное поле _element. 
     // Так у других элементов появится доступ к ней.
-    this._element = this._getTemplate();
+    this._element = this._getTemplate(); // тут создаю элемент
+    this._elementPhoto = this._element.querySelector('.element__photo');
 
     this._setEventListeners();
 
-    const elementPhoto = this._element.querySelector('.element__photo');
-
     //добавим данные 
-    elementPhoto.src = this._link;
-    elementPhoto.setAttribute('alt', this._name);//можно поставить точку .alt равнозначно
+    this._elementPhoto.src = this._link;
+    this._elementPhoto.setAttribute('alt', this._name);//можно поставить точку .alt равнозначно
     const elementCaption = this._element.querySelector('.element__caption');
     elementCaption.textContent = this._name;
 
@@ -37,8 +37,8 @@ export default class Card {
     const deleteButton = this._element.querySelector('.element__delete-button');
     deleteButton.addEventListener('click', this._handleDeleteButtonClick);
 
-    const elementPhoto = this._element.querySelector('.element__photo');
-    elementPhoto.addEventListener('click', () => { 
+    
+    this._elementPhoto.addEventListener('click', () => { 
       this._handleOpenPopupFullImage()
     });
   }
@@ -60,3 +60,4 @@ export default class Card {
     openPopupUniversal(popupZoom);
   }
 }
+
