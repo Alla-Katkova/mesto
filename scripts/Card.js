@@ -22,7 +22,7 @@ export default class Card {
 
     //добавим данные 
     this._elementPhoto.src = this._link;
-    this._elementPhoto.setAttribute('alt', this._name);//можно поставить точку .alt равнозначно
+    this._elementPhoto.alt = this._name;//можно поставить написать this._elementPhoto.setAttribute('alt', this._name) равнозначно
     const elementCaption = this._element.querySelector('.element__caption');
     elementCaption.textContent = this._name;
 
