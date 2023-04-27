@@ -71,8 +71,8 @@ const popupList = document.querySelectorAll('.popup')
 
 //const cardTemplate = document.querySelector('#elementTemplate').content.querySelector('.element')
 
-initialCards.forEach((item) => {
-  const card = new Card(item, '#elementTemplate');
+initialCards.forEach((cardData) => {
+  const card = new Card(cardData, '#elementTemplate', handleOpenPopup);
   const cardElement = card.generateCard();
 
   elements.append(cardElement);
@@ -148,7 +148,7 @@ function submitFormAdd(event) {
   };
 
 
-  const card = new Card(cardData, '#elementTemplate');
+  const card = new Card(cardData, '#elementTemplate', handleOpenPopup);
   const cardElement = card.generateCard();
   elements.prepend(cardElement);
   closePopupUniversal(popupAdd);
@@ -163,6 +163,13 @@ function resetAddForm() {
   saveButtonFormAdd.classList.add(validationConfig.inactiveButtonClass)
   saveButtonFormAdd.setAttribute('disabled', true)
 
+}
+
+function handleOpenPopup(name, link) {
+  popupZoomImages.setAttribute("src", link);
+  popupZoomImages.setAttribute("alt", name);
+  popupZoomCaption.textContent = name;
+  openPopupUniversal(popupZoom);
 }
 
 popupFormProfileEdit.addEventListener("submit", submitFormProfileEdit);

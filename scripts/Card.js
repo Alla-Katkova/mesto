@@ -1,8 +1,9 @@
 export default class Card {
-  constructor(data, templateSelector) {
+  constructor(data, templateSelector, handleOpenPopupCallback) {
     this._name = data.name;
     this._link = data.link;
     this._templateSelector = templateSelector;
+    this._handleOpenPopupCallback = handleOpenPopupCallback
   }
 
   _getTemplate() {
@@ -18,6 +19,7 @@ export default class Card {
     // Запишем разметку в приватное поле _element.
     // Так у других элементов появится доступ к ней.
     this._element = this._getTemplate(); // тут создаю элемент
+   
     this._elementPhoto = this._element.querySelector(".element__photo");
 
     this._setEventListeners();
@@ -37,7 +39,9 @@ export default class Card {
     likeButton.addEventListener("click", this._handleLikeToggle);
 
     const deleteButton = this._element.querySelector(".element__delete-button");
-    deleteButton.addEventListener("click", this._handleDeleteButtonClick);
+    deleteButton.addEventListener("click", () => {
+      this._handleDeleteButtonClick()
+    });
 
     this._elementPhoto.addEventListener("click", () => {
       this._handleOpenPopupFullImage();
@@ -48,16 +52,14 @@ export default class Card {
     event.target.classList.toggle("element__like-button_active");
   }
 
-  _handleDeleteButtonClick(event) {
-    const button = event.target;
-    const elementToDelete = button.closest(".element");
-    elementToDelete.remove();
+  _handleDeleteButtonClick() {
+    //const button = event.target;
+    //this._element = button.closest(".element");
+    this._element.remove();
+  
   }
 
   _handleOpenPopupFullImage() {
-    popupZoomImages.setAttribute("src", this._link);
-    popupZoomImages.setAttribute("alt", this._name);
-    popupZoomCaption.textContent = this._name;
-    openPopupUniversal(popupZoom);
+    this._handleOpenPopupCallback(this._name, this._link)
   }
 }
