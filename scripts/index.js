@@ -137,36 +137,7 @@ function submitFormProfileEdit(event) {
   closePopupUniversal(popupProfileEdit)
 }
 
-// function handleOpenPopupFullImage(data) {
 
-//   popupZoomImages.setAttribute('src', data.link);
-//   popupZoomImages.setAttribute('alt', data.name);
-//   popupZoomCaption.textContent = data.name;
-//   openPopupUniversal(popupZoom);
-// }
-
-  // function createCard(cardData) {
-  //   //   const newElement = cardTemplate.cloneNode(true);
-  //   //   const elementPhoto = newElement.querySelector('.element__photo');
-  //   //   elementPhoto.setAttribute('src', cardData.link);
-  //   //   elementPhoto.setAttribute('alt', cardData.name);
-  //   //   const elementCaption = newElement.querySelector('.element__caption');
-  //   //   elementCaption.textContent = cardData.name;
-
-  //   // const deleteButton = newElement.querySelector('.element__delete-button');
-  //   // deleteButton.addEventListener('click', handleDeleteButtonClick);
-
-  //   // const likeButton = newElement.querySelector('.element__like-button');
-  //   // likeButton.addEventListener('click', function (event) {
-  //   //   event.target.classList.toggle('element__like-button_active')
-  //   // })
-
-  //   elementPhoto.addEventListener('click', function () {
-  //     handleOpenPopupFullImage(cardData)
-  //   });
-
-  //   return newElement;
-  // }
 
 function submitFormAdd(event) {
   event.preventDefault();
@@ -176,9 +147,6 @@ function submitFormAdd(event) {
     link: photoLinkInput.value
   };
 
-  // const newElement = createCard(cardData);
-  // elements.prepend(newElement);
-  // closePopupUniversal(popupAdd)
 
   const card = new Card(cardData, '#elementTemplate');
   const cardElement = card.generateCard();
@@ -188,20 +156,10 @@ function submitFormAdd(event) {
 }
 
 
-
-// initialCards.forEach((item) => {
-//   const card = new Card(item, '#elementTemplate');
-//   const cardElement = card.generateCard();
-
-//   elements.append(cardElement);
-// });
-
-
-
 function resetAddForm() {
   const saveButtonFormAdd = popupFormAdd.querySelector('.popup__save-button_add')
-  popupFormAdd.reset(); 
-  
+  popupFormAdd.reset();
+
   saveButtonFormAdd.classList.add(validationConfig.inactiveButtonClass)
   saveButtonFormAdd.setAttribute('disabled', true)
 
@@ -210,12 +168,6 @@ function resetAddForm() {
 popupFormProfileEdit.addEventListener("submit", submitFormProfileEdit);
 popupFormAdd.addEventListener("submit", submitFormAdd);
 
-
-// function handleDeleteButtonClick(event) {
-//   const button = event.target;
-//   const elementToDelete = button.closest('.element');
-//   elementToDelete.remove();
-// }
 
 const popupCloseButtonZoom = popupZoom.querySelector('.popup__close-button-zoom');
 popupCloseButtonZoom.addEventListener("click", function () {

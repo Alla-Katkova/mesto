@@ -6,24 +6,26 @@ export default class Card {
   }
 
   _getTemplate() {
-    const cardTemplate = document.querySelector(this._templateSelector).content.querySelector('.element')
+    const cardTemplate = document
+      .querySelector(this._templateSelector)
+      .content.querySelector(".element");
     const newElement = cardTemplate.cloneNode(true);
 
-    return newElement
+    return newElement;
   }
 
   generateCard() {
-    // Запишем разметку в приватное поле _element. 
+    // Запишем разметку в приватное поле _element.
     // Так у других элементов появится доступ к ней.
     this._element = this._getTemplate(); // тут создаю элемент
-    this._elementPhoto = this._element.querySelector('.element__photo');
+    this._elementPhoto = this._element.querySelector(".element__photo");
 
     this._setEventListeners();
 
-    //добавим данные 
+    //добавим данные
     this._elementPhoto.src = this._link;
-    this._elementPhoto.alt = this._name;//можно поставить написать this._elementPhoto.setAttribute('alt', this._name) равнозначно
-    const elementCaption = this._element.querySelector('.element__caption');
+    this._elementPhoto.alt = this._name; //можно поставить написать this._elementPhoto.setAttribute('alt', this._name) равнозначно
+    const elementCaption = this._element.querySelector(".element__caption");
     elementCaption.textContent = this._name;
 
     //Вернём элемент наружу
@@ -31,33 +33,31 @@ export default class Card {
   }
 
   _setEventListeners() {
-    const likeButton = this._element.querySelector('.element__like-button');
-    likeButton.addEventListener('click', this._handleLikeToggle)
+    const likeButton = this._element.querySelector(".element__like-button");
+    likeButton.addEventListener("click", this._handleLikeToggle);
 
-    const deleteButton = this._element.querySelector('.element__delete-button');
-    deleteButton.addEventListener('click', this._handleDeleteButtonClick);
+    const deleteButton = this._element.querySelector(".element__delete-button");
+    deleteButton.addEventListener("click", this._handleDeleteButtonClick);
 
-    
-    this._elementPhoto.addEventListener('click', () => { 
-      this._handleOpenPopupFullImage()
+    this._elementPhoto.addEventListener("click", () => {
+      this._handleOpenPopupFullImage();
     });
   }
 
   _handleLikeToggle(event) {
-    event.target.classList.toggle('element__like-button_active')
+    event.target.classList.toggle("element__like-button_active");
   }
 
   _handleDeleteButtonClick(event) {
     const button = event.target;
-    const elementToDelete = button.closest('.element');
+    const elementToDelete = button.closest(".element");
     elementToDelete.remove();
   }
 
   _handleOpenPopupFullImage() {
-    popupZoomImages.setAttribute('src', this._link);
-    popupZoomImages.setAttribute('alt', this._name);
+    popupZoomImages.setAttribute("src", this._link);
+    popupZoomImages.setAttribute("alt", this._name);
     popupZoomCaption.textContent = this._name;
     openPopupUniversal(popupZoom);
   }
 }
-
