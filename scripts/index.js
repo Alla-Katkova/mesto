@@ -78,10 +78,28 @@ initialCards.forEach((cardData) => {
   elements.append(cardElement);
 });
 
-forms.forEach((formElement) => {
-  const form = new FormValidator(validationConfig, formElement);
-  form.enableValidation();
+// const validators = {
+//   form1: new FormValidator(validationConfig, forms[0]),
+//   popupFormAdd: new FormValidator(validationConfig, forms[1])
+// };
+
+// validators.form1.enableValidation()
+// validators.form2.enableValidation()
+
+// const nameOfTheFormOne = forms[1].getAttribute('name') //popupFormAdd
+// validators[forms[1].getAttribute('name')]  === validators.popupFormAdd
+// forms.forEach((formElement) => {
+//   const form = new FormValidator(validationConfig, formElement);
+//   form.enableValidation();
+// });
+
+const validators = {};
+forms.forEach((formElement) => { 
+  const validator = new FormValidator(validationConfig, formElement); 
+  validator.enableValidation();
+  validators[formElement.getAttribute('name')] = validator; 
 });
+
 
 
 function closePopupByEscape(event) {
@@ -157,11 +175,10 @@ function submitFormAdd(event) {
 
 
 function resetAddForm() {
-  const saveButtonFormAdd = popupFormAdd.querySelector('.popup__save-button_add')
+  
   popupFormAdd.reset();
 
-  saveButtonFormAdd.classList.add(validationConfig.inactiveButtonClass)
-  saveButtonFormAdd.setAttribute('disabled', true)
+  validators[popupFormAdd.getAttribute('name')].disableButton();
 
 }
 
@@ -171,6 +188,7 @@ function handleOpenPopup(name, link) {
   popupZoomCaption.textContent = name;
   openPopupUniversal(popupZoom);
 }
+
 
 popupFormProfileEdit.addEventListener("submit", submitFormProfileEdit);
 popupFormAdd.addEventListener("submit", submitFormAdd);

@@ -6,23 +6,22 @@ export default class FormValidator {
     this._inactiveButtonClass = data.inactiveButtonClass;
     this._inputErrorClass = data.inputErrorClass;
     this._formToValidate = formToValidate;
+    this._formButton = formToValidate.querySelector(data.submitButtonSelector);
   }
 
   _setEventListeners = () => {
     const formInputs = Array.from(
       this._formToValidate.querySelectorAll(this._inputSelector)
     );
-    const formButton = this._formToValidate.querySelector(
-      this._submitButtonSelector
-    );
-    this._disableButton(formButton);
+    
+    this.disableButton();
     formInputs.forEach((input) => {
       input.addEventListener("input", () => {
         this._showErrorIfInvalid(input);
         if (this._hasInvalidInput(formInputs)) {
-          this._disableButton(formButton);
+          this.disableButton();
         } else {
-          this._enableButton(formButton);
+          this._enableButton();
         }
       });
     });
@@ -60,14 +59,14 @@ export default class FormValidator {
   };
 
   //для того, чтобы кнопку сделать неактивной нужно убрать класс valid, добавить класс invalid и добавить атрибут disabled
-  _enableButton = (button) => {
-    button.classList.remove(this._inactiveButtonClass);
-    button.removeAttribute("disabled", true);
+  _enableButton = () => {
+    this._formButton.classList.remove(this._inactiveButtonClass);
+    this._formButton.removeAttribute("disabled", true);
   };
 
-  _disableButton = (button) => {
-    button.classList.add(this._inactiveButtonClass);
-    button.setAttribute("disabled", true);
+  disableButton = () => {
+    this._formButton.classList.add(this._inactiveButtonClass);
+    this._formButton.setAttribute("disabled", true);
   };
 }
 
