@@ -7,18 +7,20 @@ export default class FormValidator {
     this._inputErrorClass = data.inputErrorClass;
     this._formToValidate = formToValidate;
     this._formButton = formToValidate.querySelector(data.submitButtonSelector);
+    this._formInputs = Array.from(formToValidate.querySelectorAll(data.inputSelector))
   }
+  
 
   _setEventListeners = () => {
-    const formInputs = Array.from(
-      this._formToValidate.querySelectorAll(this._inputSelector)
-    );
+    // const formInputs = Array.from(
+    //   this._formToValidate.querySelectorAll(this._inputSelector)
+    // );
     
     this.disableButton();
-    formInputs.forEach((input) => {
+    this._formInputs.forEach((input) => {
       input.addEventListener("input", () => {
         this._showErrorIfInvalid(input);
-        if (this._hasInvalidInput(formInputs)) {
+        if (this._hasInvalidInput(this._formInputs)) {
           this.disableButton();
         } else {
           this._enableButton();
@@ -54,8 +56,9 @@ export default class FormValidator {
   };
 
   // функция для возможности применения enableButton и disableButton
-  _hasInvalidInput = (formInputs) => {
-    return formInputs.some((item) => !item.validity.valid); // проверяем, есть ли какое-то поле, которые отвечает условию !item.validity.valid) ищем хотя бы одно не валидное поле
+  _hasInvalidInput = () => {
+ 
+    return this._formInputs.some((item) => !item.validity.valid); // проверяем, есть ли какое-то поле, которые отвечает условию !item.validity.valid) ищем хотя бы одно не валидное поле
   };
 
   //для того, чтобы кнопку сделать неактивной нужно убрать класс valid, добавить класс invalid и добавить атрибут disabled

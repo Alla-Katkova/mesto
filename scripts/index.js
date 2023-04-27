@@ -43,7 +43,8 @@ const forms = Array.from(document.querySelectorAll(validationConfig.formSelector
 const profileButtonEdit = document.querySelector(".profile__button-edit");
 const profileButtonAdd = document.querySelector(".profile__button-add");
 
-const popupProfileEdit = document.querySelector(".popup");
+const popupProfileEdit = document.querySelector(".popup-edit");
+
 const popupAdd = document.querySelector(".popup-add")
 
 const popupCloseButtonProfileEdit = popupProfileEdit.querySelector(".popup__close-button");
@@ -177,7 +178,6 @@ function submitFormAdd(event) {
 function resetAddForm() {
   
   popupFormAdd.reset();
-
   validators[popupFormAdd.getAttribute('name')].disableButton();
 
 }
