@@ -3,6 +3,7 @@ import FormValidator from './FormValidator.js';
 import Section from './Section.js';
 
 
+
 export const initialCards = [
   {
     name: 'Архыз',
@@ -82,6 +83,8 @@ const popupList = document.querySelectorAll('.popup')
 // }
 
 const elementsSelector = '.elements'
+const popupProfileSelector = ".popup-edit"
+
 
 const section = new Section ({
   items: initialCards, //мой массив карточек
@@ -123,55 +126,29 @@ forms.forEach((formElement) => {
   validators[formElement.getAttribute('name')] = validator; 
 });
 
+const profilePopup = new Popup (popupProfileSelector) 
 
-//запихну в popup родителя
-function closePopupByEscape(event) {
-  if (event.key === "Escape") {
-    const openedPopup = document.querySelector('.popup_opened')
-    closePopupUniversal(openedPopup)
-  }
-}
-//запихну в popup родителя
-function openPopupUniversal(popupElement) {
-  popupElement.classList.add("popup_opened");
-  document.addEventListener('keydown', closePopupByEscape);
-}
-////запихну в popup наследника UserInfo
+//запихну в popup наследника UserInfo
 function openPopupProfileEdit() {
   nameInput.value = profileName.textContent;
   statusInput.value = profileStatus.textContent;
-  openPopupUniversal(popupProfileEdit);
+
+
 }
 // либо удалю, либо запихну в наследника PopupWithForm
 function openPopupAdd() {
-  openPopupUniversal(popupAdd);
+ // openPopupUniversal(popupAdd);
 }
-
-//запихну в popup родителя
-function closePopupUniversal(element) {
-  element.classList.remove("popup_opened");
-  document.removeEventListener('keydown', closePopupByEscape);
-
-}
-//закрытие на овелей 
-//запихну в popup родителя
-popupList.forEach(function (popupItem) {
-  popupItem.addEventListener('click', function (event) {
-    if (event.target === event.currentTarget) {
-      closePopupUniversal(popupItem);
-    }
-  })
-})
 
 //запихну в popup наследника UserInfo
 profileButtonEdit.addEventListener("click", openPopupProfileEdit);
 popupCloseButtonProfileEdit.addEventListener("click", function () {
-  closePopupUniversal(popupProfileEdit)
+  //closePopupUniversal(popupProfileEdit)
 });
 //запихну в popup наследника PopupWithForm
 profileButtonAdd.addEventListener("click", openPopupAdd);
 popupCloseButtonAdd.addEventListener("click", function () {
-  closePopupUniversal(popupAdd)
+  //closePopupUniversal(popupAdd)
 });
 
 //запихну в popup наследника UserInfo
@@ -179,7 +156,7 @@ function submitFormProfileEdit(event) {
   event.preventDefault();
   profileName.textContent = nameInput.value;
   profileStatus.textContent = statusInput.value;
-  closePopupUniversal(popupProfileEdit)
+  //closePopupUniversal(popupProfileEdit)
 }
 
 
@@ -196,7 +173,7 @@ function submitFormAdd(event) {
 //запихну в popup наследника PopupWithForm
   const newCard = createCard(cardData);
   elements.prepend(newCard);
-  closePopupUniversal(popupAdd);
+  //closePopupUniversal(popupAdd);
   resetAddForm();
 }
 
@@ -211,7 +188,7 @@ function handleOpenPopup(name, link) {
   popupZoomImages.setAttribute("src", link);
   popupZoomImages.setAttribute("alt", name);
   popupZoomCaption.textContent = name;
-  openPopupUniversal(popupZoom);
+  //openPopupUniversal(popupZoom);
 }
 
 //запихну в popup наследника UserInfo
@@ -223,7 +200,7 @@ popupFormAdd.addEventListener("submit", submitFormAdd);
 //запихну в popup наследника PopupWithImage
 const popupCloseButtonZoom = popupZoom.querySelector('.popup__close-button-zoom');
 popupCloseButtonZoom.addEventListener("click", function () {
-  closePopupUniversal(popupZoom);
+  //closePopupUniversal(popupZoom);
   popupZoomImages.setAttribute('src', '');
   popupZoomImages.setAttribute('alt', '');
   popupZoomCaption.textContent = '';
