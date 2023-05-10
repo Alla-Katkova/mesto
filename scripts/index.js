@@ -1,8 +1,9 @@
 import Card from './Card.js';
 import FormValidator from './FormValidator.js';
+import Section from './Section.js';
 
 
-const initialCards = [
+export const initialCards = [
   {
     name: 'Архыз',
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
@@ -29,7 +30,7 @@ const initialCards = [
   }
 ];
 
-
+// селекторы для валидации
 const validationConfig = {
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
@@ -37,7 +38,7 @@ const validationConfig = {
   inactiveButtonClass: 'popup__save-button_invalid',
   inputErrorClass: 'popup__input_type_error'
 }
-
+// все формы
 const forms = Array.from(document.querySelectorAll(validationConfig.formSelector))
 
 const profileButtonEdit = document.querySelector(".profile__button-edit");
@@ -72,16 +73,31 @@ const popupList = document.querySelectorAll('.popup')
 
 //const cardTemplate = document.querySelector('#elementTemplate').content.querySelector('.element')
 
-function createCard(cardData) {
-  const card = new Card(cardData, '#elementTemplate', handleOpenPopup);
-  const cardElement = card.generateCard();
-  return cardElement;
-}
 
-initialCards.forEach((cardData) => {
-  const newCard = createCard(cardData);
-  elements.append(newCard);
-});
+// // перенесу в класс секции
+// function createCard(cardData) {
+//   const card = new Card(cardData, '#elementTemplate', handleOpenPopup);
+//   const cardElement = card.generateCard();
+//   return cardElement;
+// }
+
+const elementsSelector = '.elements'
+
+const section = new Section ({
+  items: initialCards, //мой массив карточек
+  renderer: (cardData) => {
+    const card = new Card (cardData, '#elementTemplate', handleOpenPopup);//в рендере создаем карточку (это колбэк фунция для создания карточки)
+    return card.generateCard(); //и возвращаем методом generate card дом элемент карточки со всеми слушателями
+  }
+}, elementsSelector) //создала константу-селектор для контейнера карточек
+
+section.render()
+
+
+// initialCards.forEach((cardData) => {
+//   const newCard = createCard(cardData);
+//   elements.append(newCard);
+// });
 
 
 
@@ -108,35 +124,37 @@ forms.forEach((formElement) => {
 });
 
 
-
+//запихну в popup родителя
 function closePopupByEscape(event) {
   if (event.key === "Escape") {
     const openedPopup = document.querySelector('.popup_opened')
     closePopupUniversal(openedPopup)
   }
 }
-
+//запихну в popup родителя
 function openPopupUniversal(popupElement) {
   popupElement.classList.add("popup_opened");
   document.addEventListener('keydown', closePopupByEscape);
 }
-
+////запихну в popup наследника UserInfo
 function openPopupProfileEdit() {
   nameInput.value = profileName.textContent;
   statusInput.value = profileStatus.textContent;
   openPopupUniversal(popupProfileEdit);
 }
-
+// либо удалю, либо запихну в наследника PopupWithForm
 function openPopupAdd() {
   openPopupUniversal(popupAdd);
 }
 
+//запихну в popup родителя
 function closePopupUniversal(element) {
   element.classList.remove("popup_opened");
   document.removeEventListener('keydown', closePopupByEscape);
 
 }
-//закрытие на овелей
+//закрытие на овелей 
+//запихну в popup родителя
 popupList.forEach(function (popupItem) {
   popupItem.addEventListener('click', function (event) {
     if (event.target === event.currentTarget) {
@@ -145,16 +163,18 @@ popupList.forEach(function (popupItem) {
   })
 })
 
+//запихну в popup наследника UserInfo
 profileButtonEdit.addEventListener("click", openPopupProfileEdit);
 popupCloseButtonProfileEdit.addEventListener("click", function () {
   closePopupUniversal(popupProfileEdit)
 });
+//запихну в popup наследника PopupWithForm
 profileButtonAdd.addEventListener("click", openPopupAdd);
 popupCloseButtonAdd.addEventListener("click", function () {
   closePopupUniversal(popupAdd)
 });
 
-
+//запихну в popup наследника UserInfo
 function submitFormProfileEdit(event) {
   event.preventDefault();
   profileName.textContent = nameInput.value;
@@ -163,30 +183,30 @@ function submitFormProfileEdit(event) {
 }
 
 
-
+//запихну в popup наследника PopupWithForm
 function submitFormAdd(event) {
   event.preventDefault();
 
+  // скорее всего пойдет в constants
   const cardData = {
     name: placeNameInput.value,
     link: photoLinkInput.value
   };
 
-
+//запихну в popup наследника PopupWithForm
   const newCard = createCard(cardData);
   elements.prepend(newCard);
   closePopupUniversal(popupAdd);
   resetAddForm();
 }
 
-
+//запихну в popup наследника PopupWithForm
 function resetAddForm() {
-  
   popupFormAdd.reset();
   validators[popupFormAdd.getAttribute('name')].disableButton();
-
 }
 
+//запихну в popup наследника PopupWithImage
 function handleOpenPopup(name, link) {
   popupZoomImages.setAttribute("src", link);
   popupZoomImages.setAttribute("alt", name);
@@ -194,11 +214,13 @@ function handleOpenPopup(name, link) {
   openPopupUniversal(popupZoom);
 }
 
-
+//запихну в popup наследника UserInfo
 popupFormProfileEdit.addEventListener("submit", submitFormProfileEdit);
+
+//запихну в popup наследника PopupWithForm
 popupFormAdd.addEventListener("submit", submitFormAdd);
 
-
+//запихну в popup наследника PopupWithImage
 const popupCloseButtonZoom = popupZoom.querySelector('.popup__close-button-zoom');
 popupCloseButtonZoom.addEventListener("click", function () {
   closePopupUniversal(popupZoom);
