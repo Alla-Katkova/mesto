@@ -2,35 +2,7 @@ import Card from './Card.js';
 import FormValidator from './FormValidator.js';
 import Section from './Section.js';
 import PopupWithImage from './PopupWithImage.js';
-
-
-
-export const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
+import { initialCards } from '../utils/constants.js'
 
 // селекторы для валидации
 const validationConfig = {
@@ -154,7 +126,6 @@ function submitFormProfileEdit(event) {
   //closePopupUniversal(popupProfileEdit)
 }
 
-
 //запихну в popup наследника PopupWithForm
 function submitFormAdd(event) {
   event.preventDefault();
@@ -178,25 +149,10 @@ function resetAddForm() {
   validators[popupFormAdd.getAttribute('name')].disableButton();
 }
 
-// //запихну в popup наследника PopupWithImage
-// function handleOpenPopup(name, link) {
-//   popupZoomImages.setAttribute("src", link);
-//   popupZoomImages.setAttribute("alt", name);
-//   popupZoomCaption.textContent = name;
-//   //openPopupUniversal(popupZoom);
-// }
-
 //запихну в popup наследника UserInfo
 popupFormProfileEdit.addEventListener("submit", submitFormProfileEdit);
 
 //запихну в popup наследника PopupWithForm
 popupFormAdd.addEventListener("submit", submitFormAdd);
 
-//запихну в popup наследника PopupWithImage
-const popupCloseButtonZoom = popupZoom.querySelector('.popup__close-button-zoom');
-popupCloseButtonZoom.addEventListener("click", function () {
-  //closePopupUniversal(popupZoom);
-  popupZoomImages.setAttribute('src', '');
-  popupZoomImages.setAttribute('alt', '');
-  popupZoomCaption.textContent = '';
-});
+
