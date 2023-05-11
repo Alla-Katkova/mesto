@@ -1,6 +1,7 @@
 import Card from './Card.js';
 import FormValidator from './FormValidator.js';
 import Section from './Section.js';
+import PopupWithImage from './PopupWithImage.js';
 
 
 
@@ -75,34 +76,28 @@ const popupList = document.querySelectorAll('.popup')
 //const cardTemplate = document.querySelector('#elementTemplate').content.querySelector('.element')
 
 
-// // перенесу в класс секции
-// function createCard(cardData) {
-//   const card = new Card(cardData, '#elementTemplate', handleOpenPopup);
-//   const cardElement = card.generateCard();
-//   return cardElement;
-// }
 
 const elementsSelector = '.elements'
 const popupProfileSelector = ".popup-edit"
+const popupZoomSelector = '.popup-zoom';
+
+
+
+
+//const profilePopup = new Popup(popupProfileSelector);
+const popupImageZoom = new PopupWithImage(popupZoomSelector)
+popupImageZoom.setEventListeners();
 
 
 const section = new Section ({
   items: initialCards, //мой массив карточек
   renderer: (cardData) => {
-    const card = new Card (cardData, '#elementTemplate', handleOpenPopup);//в рендере создаем карточку (это колбэк фунция для создания карточки)
+    const card = new Card (cardData, '#elementTemplate', popupImageZoom.open);//в рендере создаем карточку (это колбэк фунция для создания карточки)
     return card.generateCard(); //и возвращаем методом generate card дом элемент карточки со всеми слушателями
   }
 }, elementsSelector) //создала константу-селектор для контейнера карточек
 
 section.render()
-
-
-// initialCards.forEach((cardData) => {
-//   const newCard = createCard(cardData);
-//   elements.append(newCard);
-// });
-
-
 
 // const validators = {
 //   form1: new FormValidator(validationConfig, forms[0]),
@@ -126,7 +121,7 @@ forms.forEach((formElement) => {
   validators[formElement.getAttribute('name')] = validator; 
 });
 
-const profilePopup = new Popup (popupProfileSelector) 
+
 
 //запихну в popup наследника UserInfo
 function openPopupProfileEdit() {
@@ -183,13 +178,13 @@ function resetAddForm() {
   validators[popupFormAdd.getAttribute('name')].disableButton();
 }
 
-//запихну в popup наследника PopupWithImage
-function handleOpenPopup(name, link) {
-  popupZoomImages.setAttribute("src", link);
-  popupZoomImages.setAttribute("alt", name);
-  popupZoomCaption.textContent = name;
-  //openPopupUniversal(popupZoom);
-}
+// //запихну в popup наследника PopupWithImage
+// function handleOpenPopup(name, link) {
+//   popupZoomImages.setAttribute("src", link);
+//   popupZoomImages.setAttribute("alt", name);
+//   popupZoomCaption.textContent = name;
+//   //openPopupUniversal(popupZoom);
+// }
 
 //запихну в popup наследника UserInfo
 popupFormProfileEdit.addEventListener("submit", submitFormProfileEdit);
