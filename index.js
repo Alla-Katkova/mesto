@@ -1,10 +1,10 @@
-import Card from './scripts/Card.js';
-import FormValidator from './scripts/FormValidator.js';
-import Section from './scripts/Section.js';
-import PopupWithImage from './scripts/PopupWithImage.js';
-import { initialCards } from './utils/constants.js'
-import UserInfo from './scripts/UserInfo.js';
-import PopupWithForm from './scripts/PopupWithForm.js';
+import Card from './scripts/components/Card.js';
+import FormValidator from './scripts/components/FormValidator.js';
+import Section from './scripts/components/Section.js';
+import PopupWithImage from './scripts/components/PopupWithImage.js';
+import { initialCards } from './scripts/utils/constants.js'
+import UserInfo from './scripts/components/UserInfo.js';
+import PopupWithForm from './scripts/components/PopupWithForm.js';
 
 // селекторы для валидации
 const validationConfig = {
