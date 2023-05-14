@@ -18,20 +18,6 @@ const validationConfig = {
 const forms = Array.from(document.querySelectorAll(validationConfig.formSelector)) // все формы
 const profileButtonEdit = document.querySelector(".profile__button-edit");
 const profileButtonAdd = document.querySelector(".profile__button-add");
-// const popupProfileEdit = document.querySelector(".popup-edit")
-// const popupAdd = document.querySelector(".popup-add")
-// const popupCloseButtonProfileEdit = popupProfileEdit.querySelector(".popup__close-button");
-// const popupCloseButtonAdd = popupAdd.querySelector(".popup__close-button-add");
-// const nameInput = popupProfileEdit.querySelector(".popup__input_type_name");
-// const statusInput = popupProfileEdit.querySelector(".popup__input_type_status");
-// const popupFormProfileEdit = popupProfileEdit.querySelector(".popup__form");
-// const profileName = document.querySelector(".profile__name");
-// const profileStatus = document.querySelector(".profile__status");
-// const placeNameInput = popupAdd.querySelector(".popup__input_type_place-name");
-// const photoLinkInput = popupAdd.querySelector(".popup__input_type_photo-link");
-// const popupFormAdd = popupAdd.querySelector(".popup__form_add")
-// const elements = document.querySelector('.elements')
-
 
 const userInfoConfig = {
   nameSelector: ".profile__name",
@@ -104,8 +90,6 @@ forms.forEach((formElement) => {
   validators[formElement.getAttribute('name')] = validator;
 });
 
-
-
 function openPopupProfileEdit() {
   profileEditPopup.setInputValues(userInfo.getUserInfo())
   profileEditPopup.open()
@@ -115,55 +99,8 @@ function openPopupAdd() {
   addPopup.open()
 }
 
-
 profileButtonEdit.addEventListener("click", openPopupProfileEdit);
-// popupCloseButtonProfileEdit.addEventListener("click", function () {
-//   //closePopupUniversal(popupProfileEdit)
-// });
-
-
 profileButtonAdd.addEventListener("click", openPopupAdd);
-// popupCloseButtonAdd.addEventListener("click", function () {
-//   addPopup.close()
-// });
 
-// function resetAddForm() {
-//   popupAddSelector.reset();
-//   validators[popupAddSelector.getAttribute('name')].disableButton();
-// }
-
-
-// function submitFormProfileEdit(event) {
-// //   event.preventDefault();
-// //   // profileName.textContent = nameInput.value;
-// //   // profileStatus.textContent = statusInput.value;
-// //   //profileEditPopup.getInputValues(userInfo.setUserInfo())
-// //   profileEditPopup.close()
-// event.preventDefault();
-// userInfo.setUserInfo(profileEditPopup.getInputValues())
-// profileEditPopup.close()
-//  }
-//  popupFormProfileEdit.addEventListener("submit", submitFormProfileEdit);
-
-// function submitFormAdd(event) {
-//   event.preventDefault();
-
-
-//   const cardData = {
-//     name: placeNameInput.value,
-//     link: photoLinkInput.value
-//   };
-
-//   const newCard = createCard(cardData);
-//   elements.prepend(newCard);
-//   //closePopupUniversal(popupAdd);
-//   resetAddForm();
-// }
-
-
-
-
-
-// popupAddSelector.addEventListener("submit", submitFormAdd);
 
 
