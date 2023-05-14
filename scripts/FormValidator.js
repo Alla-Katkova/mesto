@@ -51,6 +51,7 @@ export default class FormValidator {
     const currentInputErrorContainer = document.querySelector(
       `#${input.id}-error`
     );
+   
     currentInputErrorContainer.textContent = ""; // тут функция checkValidity () будет сверять с данными длины из html, можно сделать через цикл for и длину массива
     input.classList.remove(this._inputErrorClass);
   };

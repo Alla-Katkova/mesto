@@ -8,10 +8,10 @@ export default class PopupWithImage extends Popup {
 
   }
 
-  open = (name, link) => {
+  open = (place, link) => {
     this._popupImageZoom.setAttribute("src", link);
-    this._popupImageZoom.setAttribute("alt", name);
-    this._popupCaptionZoom.textContent = name;
+    this._popupImageZoom.setAttribute("alt", place);
+    this._popupCaptionZoom.textContent = place;
     super.open()
   }
 }

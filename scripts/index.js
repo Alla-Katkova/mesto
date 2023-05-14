@@ -4,6 +4,7 @@ import Section from './Section.js';
 import PopupWithImage from './PopupWithImage.js';
 import { initialCards } from '../utils/constants.js'
 import UserInfo from './UserInfo.js';
+import PopupWithForm from './PopupWithForm.js';
 
 // селекторы для валидации
 const validationConfig = {
@@ -14,40 +15,47 @@ const validationConfig = {
   inputErrorClass: 'popup__input_type_error'
 }
 
-const userInfoConfig = {
-  nameSelector: ".popup__input_type_name",
-  statusSelector: ".popup__input_type_status"
-}
-
-// все формы
-const forms = Array.from(document.querySelectorAll(validationConfig.formSelector))
+const forms = Array.from(document.querySelectorAll(validationConfig.formSelector)) // все формы
 const profileButtonEdit = document.querySelector(".profile__button-edit");
 const profileButtonAdd = document.querySelector(".profile__button-add");
-const popupProfileEdit = document.querySelector(".popup-edit");
-const popupAdd = document.querySelector(".popup-add")
-const popupCloseButtonProfileEdit = popupProfileEdit.querySelector(".popup__close-button");
-const popupCloseButtonAdd = popupAdd.querySelector(".popup__close-button-add");
+// const popupProfileEdit = document.querySelector(".popup-edit")
+// const popupAdd = document.querySelector(".popup-add")
+// const popupCloseButtonProfileEdit = popupProfileEdit.querySelector(".popup__close-button");
+// const popupCloseButtonAdd = popupAdd.querySelector(".popup__close-button-add");
 // const nameInput = popupProfileEdit.querySelector(".popup__input_type_name");
 // const statusInput = popupProfileEdit.querySelector(".popup__input_type_status");
-const popupFormProfileEdit = popupProfileEdit.querySelector(".popup__form");
-const profileName = document.querySelector(".profile__name");
-const profileStatus = document.querySelector(".profile__status");
-const placeNameInput = popupAdd.querySelector(".popup__input_type_place-name");
-const photoLinkInput = popupAdd.querySelector(".popup__input_type_photo-link");
-const popupFormAdd = popupAdd.querySelector(".popup__form_add")
-const elements = document.querySelector('.elements')
+// const popupFormProfileEdit = popupProfileEdit.querySelector(".popup__form");
+// const profileName = document.querySelector(".profile__name");
+// const profileStatus = document.querySelector(".profile__status");
+// const placeNameInput = popupAdd.querySelector(".popup__input_type_place-name");
+// const photoLinkInput = popupAdd.querySelector(".popup__input_type_photo-link");
+// const popupFormAdd = popupAdd.querySelector(".popup__form_add")
+// const elements = document.querySelector('.elements')
 
 
+const userInfoConfig = {
+  nameSelector: ".profile__name",
+  statusSelector: ".profile__status"
+}
 
 const elementsSelector = '.elements'
 const popupZoomSelector = '.popup-zoom';
+const popupAddSelector = ".popup-add";
+const popupProfileEditSelector = ".popup-edit"
+
 
 const popupImageZoom = new PopupWithImage(popupZoomSelector)
 popupImageZoom.setEventListeners();
 
-const profilePopup = new UserInfo(userInfoConfig);
+const userInfo = new UserInfo(userInfoConfig);
 
+const profileEditPopup = new PopupWithForm(popupProfileEditSelector, (event) => {
+  event.preventDefault();
+  userInfo.setUserInfo(profileEditPopup.getInputValues())
+  profileEditPopup.close()
+})
 
+profileEditPopup.setEventListeners()
 
 const section = new Section({
   items: initialCards, //мой массив карточек
@@ -58,6 +66,14 @@ const section = new Section({
 }, elementsSelector) //создала константу-селектор для контейнера карточек
 
 section.render()
+
+const addPopup = new PopupWithForm(popupAddSelector, (event) => {
+  event.preventDefault();
+  section.addItem(section.render(addPopup.getInputValues()))
+  addPopup.close()
+  resetAddForm();
+})
+addPopup.setEventListeners()
 
 // const validators = {
 //   form1: new FormValidator(validationConfig, forms[0]),
@@ -83,64 +99,64 @@ forms.forEach((formElement) => {
 
 
 
-//запихну в popup наследника UserInfo
 function openPopupProfileEdit() {
-  nameInput.value = profileName.textContent;
-  statusInput.value = profileStatus.textContent;
-
-
+  profileEditPopup.setInputValues(userInfo.getUserInfo())
+  profileEditPopup.open()
 }
-// либо удалю, либо запихну в наследника PopupWithForm
+
 function openPopupAdd() {
-  // openPopupUniversal(popupAdd);
+  addPopup.open()
 }
 
-//запихну в popup наследника UserInfo
+
 profileButtonEdit.addEventListener("click", openPopupProfileEdit);
-popupCloseButtonProfileEdit.addEventListener("click", function () {
-  //closePopupUniversal(popupProfileEdit)
-});
-//запихну в popup наследника PopupWithForm
+// popupCloseButtonProfileEdit.addEventListener("click", function () {
+//   //closePopupUniversal(popupProfileEdit)
+// });
+
+
 profileButtonAdd.addEventListener("click", openPopupAdd);
-popupCloseButtonAdd.addEventListener("click", function () {
-  //closePopupUniversal(popupAdd)
-});
+// popupCloseButtonAdd.addEventListener("click", function () {
+//   addPopup.close()
+// });
 
-//запихну в popup наследника UserInfo
-function submitFormProfileEdit(event) {
-  event.preventDefault();
-  profileName.textContent = nameInput.value;
-  profileStatus.textContent = statusInput.value;
-  //closePopupUniversal(popupProfileEdit)
-}
-
-//запихну в popup наследника PopupWithForm
-function submitFormAdd(event) {
-  event.preventDefault();
-
-  // скорее всего пойдет в constants
-  const cardData = {
-    name: placeNameInput.value,
-    link: photoLinkInput.value
-  };
-
-  //запихну в popup наследника PopupWithForm
-  const newCard = createCard(cardData);
-  elements.prepend(newCard);
-  //closePopupUniversal(popupAdd);
-  resetAddForm();
-}
-
-//запихну в popup наследника PopupWithForm
 function resetAddForm() {
-  popupFormAdd.reset();
-  validators[popupFormAdd.getAttribute('name')].disableButton();
+  popupAddSelector.reset();
+  validators[popupAddSelector.getAttribute('name')].disableButton();
 }
 
-//запихну в popup наследника UserInfo
-popupFormProfileEdit.addEventListener("submit", submitFormProfileEdit);
 
-//запихну в popup наследника PopupWithForm
-popupFormAdd.addEventListener("submit", submitFormAdd);
+// function submitFormProfileEdit(event) {
+// //   event.preventDefault();
+// //   // profileName.textContent = nameInput.value;
+// //   // profileStatus.textContent = statusInput.value;
+// //   //profileEditPopup.getInputValues(userInfo.setUserInfo())
+// //   profileEditPopup.close()
+// event.preventDefault();
+// userInfo.setUserInfo(profileEditPopup.getInputValues())
+// profileEditPopup.close()
+//  }
+//  popupFormProfileEdit.addEventListener("submit", submitFormProfileEdit);
+
+// function submitFormAdd(event) {
+//   event.preventDefault();
+
+
+//   const cardData = {
+//     name: placeNameInput.value,
+//     link: photoLinkInput.value
+//   };
+
+//   const newCard = createCard(cardData);
+//   elements.prepend(newCard);
+//   //closePopupUniversal(popupAdd);
+//   resetAddForm();
+// }
+
+
+
+
+
+// popupAddSelector.addEventListener("submit", submitFormAdd);
 
 
