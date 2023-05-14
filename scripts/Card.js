@@ -1,9 +1,9 @@
 export default class Card {
-  constructor(data, templateSelector, handleOpenPopupCallback) {
+  constructor(data, templateSelector, handleCardClick) {
     this._name = data.place;
     this._link = data.link;
     this._templateSelector = templateSelector;
-    this._handleOpenPopupCallback = handleOpenPopupCallback
+    this._handleCardClick = handleCardClick
   }
 
   _getTemplate() {
@@ -19,9 +19,7 @@ export default class Card {
     // Запишем разметку в приватное поле _element.
     // Так у других элементов появится доступ к ней.
     this._element = this._getTemplate(); // тут создаю элемент
-   
     this._elementPhoto = this._element.querySelector(".element__photo");
-
     this._setEventListeners();
 
     //добавим данные
@@ -60,6 +58,6 @@ export default class Card {
   }
 
   _handleOpenPopupFullImage() {
-    this._handleOpenPopupCallback(this._name, this._link)
+    this._handleCardClick(this._name, this._link)
   }
 }

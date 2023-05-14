@@ -1,10 +1,10 @@
-import Card from './Card.js';
-import FormValidator from './FormValidator.js';
-import Section from './Section.js';
-import PopupWithImage from './PopupWithImage.js';
-import { initialCards } from '../utils/constants.js'
-import UserInfo from './UserInfo.js';
-import PopupWithForm from './PopupWithForm.js';
+import Card from './scripts/Card.js';
+import FormValidator from './scripts/FormValidator.js';
+import Section from './scripts/Section.js';
+import PopupWithImage from './scripts/PopupWithImage.js';
+import { initialCards } from './utils/constants.js'
+import UserInfo from './scripts/UserInfo.js';
+import PopupWithForm from './scripts/PopupWithForm.js';
 
 // селекторы для валидации
 const validationConfig = {
@@ -69,9 +69,16 @@ section.render()
 
 const addPopup = new PopupWithForm(popupAddSelector, (event) => {
   event.preventDefault();
-  section.addItem(section.render(addPopup.getInputValues()))
+  const sectionForNewCard = new Section({
+    items: [addPopup.getInputValues()],
+    renderer: (cardData) => {
+      const card = new Card(cardData, '#elementTemplate', popupImageZoom.open);//в рендере создаем карточку (это колбэк фунция для создания карточки)
+      return card.generateCard(); //и возвращаем методом generate card дом элемент карточки со всеми слушателями
+    }
+  }, elementsSelector)
+
+  sectionForNewCard.render()
   addPopup.close()
-  resetAddForm();
 })
 addPopup.setEventListeners()
 
@@ -120,10 +127,10 @@ profileButtonAdd.addEventListener("click", openPopupAdd);
 //   addPopup.close()
 // });
 
-function resetAddForm() {
-  popupAddSelector.reset();
-  validators[popupAddSelector.getAttribute('name')].disableButton();
-}
+// function resetAddForm() {
+//   popupAddSelector.reset();
+//   validators[popupAddSelector.getAttribute('name')].disableButton();
+// }
 
 
 // function submitFormProfileEdit(event) {
