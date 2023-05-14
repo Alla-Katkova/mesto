@@ -50,6 +50,7 @@ const addPopup = new PopupWithForm(popupAddSelector, (event) => {
 
   sectionForNewCard.render()
   addPopup.close()
+  validators.popupFormAdd.disableButton()
 })
 
 forms.forEach((formElement) => {
