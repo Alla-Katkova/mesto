@@ -6,30 +6,30 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mesto</title>
-  <link rel="stylesheet" href="./pages/index.css">
+  
 </head>
 
 <body class="root">
   <header class="header">
-    <img src="./images/logo_mesto.svg" class="header__logo" alt="лого место">
+    <img src="<%=require('./images/logo_mesto.svg')%>" class="header__logo" alt="лого место">
   </header>
 
   <main class="content">
     <section class="profile">
       <div class="profile__intro-container">
-        <img src="./images/profile.img.jpg" class="profile__avatar" alt="аватарка профиля">
+        <img src="<%=require('./images/profile.img.jpg')%>" class="profile__avatar" alt="аватарка профиля">
         <div class="profile__info">
           <div class="profile__container">
             <h1 class="profile__name">Жак-Ив Кусто</h1>
             <button type="button" aria-label="edit" class="profile__button-edit">
-              <img src="./images/edit-button.svg" class="profile__img-edit" alt="кнопка редактирования профиля">
+              <img src="<%=require('./images/edit-button.svg')%>" class="profile__img-edit" alt="кнопка редактирования профиля">
             </button>
           </div>
           <p class="profile__status">Исследователь океана</p>
         </div>
       </div>
       <button type="button" aria-label="add" class="profile__button-add">
-        <img src="./images/img-plus.svg" class="profile__img-add" alt="кнопка добавления">
+        <img src="<%=require('./images/img-plus.svg')%>" class="profile__img-add" alt="кнопка добавления">
       </button>
     </section>
 
@@ -92,7 +92,7 @@
       </div>
     </article>
   </template>
-  <script type="module" src="./pages/index.js"></script>
+ 
 </body>
 
 </html>
