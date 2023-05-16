@@ -1,10 +1,10 @@
-import './pages/index.css';
-import Card from './scripts/components/Card.js';
-import FormValidator from './scripts/components/FormValidator.js';
-import Section from './scripts/components/Section.js';
-import PopupWithImage from './scripts/components/PopupWithImage.js';
-import UserInfo from './scripts/components/UserInfo.js';
-import PopupWithForm from './scripts/components/PopupWithForm.js';
+import './index.css';
+import Card from '../scripts/components/Card.js';
+import FormValidator from '../scripts/components/FormValidator.js';
+import Section from '../scripts/components/Section.js';
+import PopupWithImage from '../scripts/components/PopupWithImage.js';
+import UserInfo from '../scripts/components/UserInfo.js';
+import PopupWithForm from '../scripts/components/PopupWithForm.js';
 import {
   initialCards,
   profileButtonEdit,
@@ -17,7 +17,7 @@ import {
   popupAddSelector,
   popupProfileEditSelector,
   validationConfig
-} from './scripts/utils/constants.js'
+} from '../scripts/utils/constants.js'
 
 const popupImageZoom = new PopupWithImage(popupZoomSelector);
 
@@ -29,29 +29,24 @@ const profileEditPopup = new PopupWithForm(popupProfileEditSelector, (event) => 
   profileEditPopup.close()
 })
 
+function creatCard (cardData) {
+  const card = new Card(cardData, '#elementTemplate', popupImageZoom.open);//в рендере создаем карточку (это колбэк фунция для создания карточки)
+  return card.generateCard(); //и возвращаем методом generate card дом элемент карточки со всеми слушателями
+}
+
 const section = new Section({
   items: initialCards, //мой массив карточек
-  renderer: (cardData) => {
-    const card = new Card(cardData, '#elementTemplate', popupImageZoom.open);//в рендере создаем карточку (это колбэк фунция для создания карточки)
-    return card.generateCard(); //и возвращаем методом generate card дом элемент карточки со всеми слушателями
-  }
+  renderer: creatCard
 }, elementsSelector) //создала константу-селектор для контейнера карточек
 
 section.render()
 
 const addPopup = new PopupWithForm(popupAddSelector, (event) => {
   event.preventDefault();
-  const sectionForNewCard = new Section({
-    items: [addPopup.getInputValues()],
-    renderer: (cardData) => {
-      const card = new Card(cardData, '#elementTemplate', popupImageZoom.open);//в рендере создаем карточку (это колбэк фунция для создания карточки)
-      return card.generateCard(); //и возвращаем методом generate card дом элемент карточки со всеми слушателями
-    }
-  }, elementsSelector)
-
-  sectionForNewCard.render()
+  const newCard = creatCard(addPopup.getInputValues());
+  section.addNewItem(newCard);
   addPopup.close()
-  validators.popupFormAdd.disableButton()
+  
 })
 
 forms.forEach((formElement) => {
@@ -67,6 +62,7 @@ function openPopupProfileEdit() {
 
 function openPopupAdd() {
   addPopup.open()
+  validators.popupFormAdd.disableButton()
 }
 
 popupImageZoom.setEventListeners();

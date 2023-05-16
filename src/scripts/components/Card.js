@@ -54,7 +54,6 @@ export default class Card {
     //const button = event.target;
     //this._element = button.closest(".element");
     this._element.remove();
-  
   }
 
   _handleOpenPopupFullImage() {
