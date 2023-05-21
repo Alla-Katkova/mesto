@@ -1,19 +1,12 @@
 export default class Api {
   constructor(config) {
-    //console.log(config)
     this._baseUrl = config.baseUrl
-    this._headers = {
-      headers: config.headers
-    }
+    this._headers = config.headers
 
   }
 
-  // getInitialCards() {
-  //   // ...
-  // }
-
   getUserDetailsFromDataBase = () => {
-    return fetch(this._baseUrl + "/users/me", this._headers)
+    return fetch(this._baseUrl + "/users/me", { headers: this._headers })
       .then(res => {
         if (res.ok) {
           return res.json();
@@ -22,6 +15,18 @@ export default class Api {
       })
   }
 
+
+  getInitialCards = () => {
+    //console.log() 
+    return fetch(this._baseUrl + "/cards", {headers: this._headers})
+    .then(res => {
+      if (res.ok) {
+        return res.json();
+      }
+      // если ошибка, отклоняем промис
+      return Promise.reject(`Ошибка: ${res.status}`);
+    });
+  }
 
 }
 

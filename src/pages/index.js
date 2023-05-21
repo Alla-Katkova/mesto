@@ -21,8 +21,6 @@ import {
 
 import Api from "../scripts/components/Api";
 
-
-
 const api = new Api({
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-66',
   headers: {
@@ -33,14 +31,19 @@ const api = new Api({
 
 const userInfo = new UserInfo(userInfoConfig)
 
-api.getUserDetailsFromDataBase().then(userDetails => {
+api.getUserDetailsFromDataBase().then(userDetailsFromDBInJson => {
+  userInfo.setUserInfoDB(userDetailsFromDBInJson)
+})
 
-  userInfo.setUserInfoDB(userDetails)
+const section = new Section(creatCard, elementsSelector)
+
+
+
+api.getInitialCards().then(arrayCardsFromDBInJson  => {
+  section.render(arrayCardsFromDBInJson)
 })
 
 const popupImageZoom = new PopupWithImage(popupZoomSelector);
-
-
 
 const profileEditPopup = new PopupWithForm(popupProfileEditSelector, (event) => {
   event.preventDefault();
@@ -53,12 +56,12 @@ function creatCard(cardData) {
   return card.generateCard(); //и возвращаем методом generate card дом элемент карточки со всеми слушателями
 }
 
-const section = new Section({
-  items: initialCards, //мой массив карточек
-  renderer: creatCard
-}, elementsSelector) //создала константу-селектор для контейнера карточек
+// const section = new Section({
+//   items: initialCards, //мой массив карточек
+//   renderer: creatCard
+// }, elementsSelector) //создала константу-селектор для контейнера карточек
 
-section.render()
+// section.render()
 
 const addPopup = new PopupWithForm(popupAddSelector, (event) => {
   event.preventDefault();
