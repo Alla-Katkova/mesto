@@ -2,7 +2,6 @@ export default class Api {
   constructor(config) {
     this._baseUrl = config.baseUrl
     this._headers = config.headers
-
   }
 
   getUserDetailsFromDataBase = () => {
@@ -27,6 +26,35 @@ export default class Api {
       return Promise.reject(`Ошибка: ${res.status}`);
     });
   }
+
+  editUserInfoInDb = (nameFromForm, aboutFromForm) => {
+    return fetch(this._baseUrl + "/users/me", {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify({
+        name: nameFromForm,
+        about: aboutFromForm
+      })
+    })
+    .then(res => {
+      if (res.ok) {
+        return res.json();
+      }
+      // если ошибка, отклоняем промис
+      return Promise.reject(`Ошибка: ${res.status}`);
+    });
+    
+  }
+
+
+
+
+
+
+
+
+
+
 
 }
 

@@ -12,10 +12,10 @@ export default class UserInfo {
             }
   }
   
-  setUserInfo(newDataUser) {
-    this._userName.textContent = newDataUser.profilename
-    this._userStatus.textContent = newDataUser.profilestatus
-  }
+  // setUserInfo(newDataUser) {
+  //   this._userName.textContent = newDataUser.profilename
+  //   this._userStatus.textContent = newDataUser.profilestatus
+  // }
 
   setUserInfoDB(userDetails) {
     this._userName.textContent = userDetails.name

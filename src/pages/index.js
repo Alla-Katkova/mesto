@@ -37,8 +37,6 @@ api.getUserDetailsFromDataBase().then(userDetailsFromDBInJson => {
 
 const section = new Section(creatCard, elementsSelector)
 
-
-
 api.getInitialCards().then(arrayCardsFromDBInJson  => {
   section.render(arrayCardsFromDBInJson)
 })
@@ -47,9 +45,21 @@ const popupImageZoom = new PopupWithImage(popupZoomSelector);
 
 const profileEditPopup = new PopupWithForm(popupProfileEditSelector, (event) => {
   event.preventDefault();
-  userInfo.setUserInfo(profileEditPopup.getInputValues())
+  const a = profileEditPopup.getInputValues()
+  //console.log(a)
+  api.editUserInfoInDb(a.profilename, a.profilestatus)
+  .then((userDetails) => {
+    userInfo.setUserInfoDB(userDetails)
+  })
+  .catch((err) => {
+    console.log(err); // выведем ошибку в консоль
+  }); 
+
+
   profileEditPopup.close()
 })
+
+
 
 function creatCard(cardData) {
   const card = new Card(cardData, '#elementTemplate', popupImageZoom.open);//в рендере создаем карточку (это колбэк фунция для создания карточки)
