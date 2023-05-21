@@ -19,9 +19,28 @@ import {
   validationConfig
 } from '../scripts/utils/constants.js'
 
+import Api from "../scripts/components/Api";
+
+
+
+const api = new Api({
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-66',
+  headers: {
+    authorization: '1aec61fe-1188-4176-bdbc-e029c1f00874',
+    'Content-Type': 'application/json'
+  }
+});
+
+const userInfo = new UserInfo(userInfoConfig)
+
+api.getUserDetailsFromDataBase().then(userDetails => {
+
+  userInfo.setUserInfoDB(userDetails)
+})
+
 const popupImageZoom = new PopupWithImage(popupZoomSelector);
 
-const userInfo = new UserInfo(userInfoConfig);
+
 
 const profileEditPopup = new PopupWithForm(popupProfileEditSelector, (event) => {
   event.preventDefault();
@@ -29,7 +48,7 @@ const profileEditPopup = new PopupWithForm(popupProfileEditSelector, (event) => 
   profileEditPopup.close()
 })
 
-function creatCard (cardData) {
+function creatCard(cardData) {
   const card = new Card(cardData, '#elementTemplate', popupImageZoom.open);//в рендере создаем карточку (это колбэк фунция для создания карточки)
   return card.generateCard(); //и возвращаем методом generate card дом элемент карточки со всеми слушателями
 }
@@ -46,7 +65,7 @@ const addPopup = new PopupWithForm(popupAddSelector, (event) => {
   const newCard = creatCard(addPopup.getInputValues());
   section.addNewItem(newCard);
   addPopup.close()
-  
+
 })
 
 forms.forEach((formElement) => {

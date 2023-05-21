@@ -31,7 +31,8 @@ const profileButtonAdd = document.querySelector(".profile__button-add");
 
 const userInfoConfig = {
   nameSelector: ".profile__name",
-  statusSelector: ".profile__status"
+  statusSelector: ".profile__status",
+  avatarSelector: ".profile__avatar"
 }
 
 const elementsSelector = '.elements'
