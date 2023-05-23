@@ -2,7 +2,9 @@ export default class Card {
   constructor(data, templateSelector, handleCardClick) {
     this._name = data.name;
     this._link = data.link;
-    this._likes = data.likes
+    this._likes = data.likes;
+    this._owner = data.owner;
+    this._id = data._id;
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick
   }
@@ -16,7 +18,7 @@ export default class Card {
     return newElement;
   }
 
-  generateCard() {
+  generateCard(userData) {
     // Запишем разметку в приватное поле _element.
     // Так у других элементов появится доступ к ней.
     this._element = this._getTemplate(); // тут создаю элемент
@@ -30,6 +32,10 @@ export default class Card {
     elementCaption.textContent = this._name;
     const likesCounter = this._element.querySelector(".element__counter");
     likesCounter.textContent = this._likes.length
+
+    // if (userData._id === this._owner._id) {
+    //   this._element.querySelector('.element__delete-button').style.display = 'block';
+    // }
     //Вернём элемент наружу
     return this._element;
   }

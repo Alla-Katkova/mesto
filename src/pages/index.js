@@ -30,16 +30,25 @@ const api = new Api({
 });
 
 const userInfo = new UserInfo(userInfoConfig)
+const section = new Section(creatCard, elementsSelector)
 
 api.getUserDetailsFromDataBase().then(userDetailsFromDBInJson => {
-  userInfo.setUserInfoDB(userDetailsFromDBInJson)
+  userInfo.setUserInfoDB(userDetailsFromDBInJson);
+  userInfo.setCurrentUserId(userDetailsFromDBInJson._id);
+  console.log(userInfo.getCurrentUserId())
+
 })
 
-const section = new Section(creatCard, elementsSelector)
+function creatCard(cardData) {
+  const card = new Card(cardData, '#elementTemplate', popupImageZoom.open);//в рендере создаем карточку (это колбэк фунция для создания карточки)
+  return card.generateCard(); //и возвращаем методом generate card дом элемент карточки со всеми слушателями
+}
+
 
 api.getInitialCards().then(arrayCardsFromDBInJson => {
   section.render(arrayCardsFromDBInJson)
 })
+
 
 const popupImageZoom = new PopupWithImage(popupZoomSelector);
 
@@ -59,10 +68,7 @@ const profileEditPopup = new PopupWithForm(popupProfileEditSelector, (event) => 
   profileEditPopup.close()
 })
 
-function creatCard(cardData) {
-  const card = new Card(cardData, '#elementTemplate', popupImageZoom.open);//в рендере создаем карточку (это колбэк фунция для создания карточки)
-  return card.generateCard(); //и возвращаем методом generate card дом элемент карточки со всеми слушателями
-}
+
 
 const addPopup = new PopupWithForm(popupAddSelector, (event) => {
   event.preventDefault();
