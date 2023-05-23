@@ -31,22 +31,30 @@ const api = new Api({
 
 const userInfo = new UserInfo(userInfoConfig)
 const section = new Section(creatCard, elementsSelector)
+api.getDataForInitialPageRendering().then(response => {
+  //console.log(response)
+  const [userDataFromDB, cardsDataFromDB] = response   //деструктурируем результат выполнения двух фетчей, который пришел в виде массива
+  userInfo.setUserInfoDB(userDataFromDB);
+  userInfo.setCurrentUserId(userDataFromDB._id);
+
+  section.render(cardsDataFromDB)
+})
 
 api.getUserDetailsFromDataBase().then(userDetailsFromDBInJson => {
-  userInfo.setUserInfoDB(userDetailsFromDBInJson);
-  userInfo.setCurrentUserId(userDetailsFromDBInJson._id);
-  console.log(userInfo.getCurrentUserId())
+  // userInfo.setUserInfoDB(userDetailsFromDBInJson);
+  // userInfo.setCurrentUserId(userDetailsFromDBInJson._id);
+ // console.log(userInfo.getCurrentUserId())
 
 })
 
 function creatCard(cardData) {
   const card = new Card(cardData, '#elementTemplate', popupImageZoom.open);//в рендере создаем карточку (это колбэк фунция для создания карточки)
-  return card.generateCard(); //и возвращаем методом generate card дом элемент карточки со всеми слушателями
+  return card.generateCard(userInfo.getCurrentUserId()); //и возвращаем методом generate card дом элемент карточки со всеми слушателями
 }
 
 
 api.getInitialCards().then(arrayCardsFromDBInJson => {
-  section.render(arrayCardsFromDBInJson)
+ // section.render(arrayCardsFromDBInJson)
 })
 
 

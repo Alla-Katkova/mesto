@@ -17,7 +17,7 @@ export default class UserInfo {
   //   this._userStatus.textContent = newDataUser.profilestatus
   // }
 
-  setUserInfoDB(userDetails) {
+  setUserInfoDB(userDetails) { // по сути это showUserInfoFromDB
     this._userName.textContent = userDetails.name
     this._userStatus.textContent = userDetails.about
     this._userAvatar.src = userDetails.avatar

@@ -18,7 +18,8 @@ export default class Card {
     return newElement;
   }
 
-  generateCard(userData) {
+  generateCard(currentUserId) {
+
     // Запишем разметку в приватное поле _element.
     // Так у других элементов появится доступ к ней.
     this._element = this._getTemplate(); // тут создаю элемент
@@ -33,9 +34,9 @@ export default class Card {
     const likesCounter = this._element.querySelector(".element__counter");
     likesCounter.textContent = this._likes.length
 
-    // if (userData._id === this._owner._id) {
-    //   this._element.querySelector('.element__delete-button').style.display = 'block';
-    // }
+    if (currentUserId !== this._owner._id) {
+      this._element.querySelector('.element__delete-button').style.display = 'none';
+    }
     //Вернём элемент наружу
     return this._element;
   }

@@ -27,6 +27,12 @@ export default class Api {
     });
   }
 
+
+
+  getDataForInitialPageRendering = () => {
+    return Promise.all([this.getUserDetailsFromDataBase(), this.getInitialCards()])
+  }
+
   editUserInfoInDb = (nameFromForm, aboutFromForm) => {
     return fetch(this._baseUrl + "/users/me", {
       method: 'PATCH',
