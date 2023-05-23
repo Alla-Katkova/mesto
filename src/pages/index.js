@@ -37,7 +37,7 @@ api.getUserDetailsFromDataBase().then(userDetailsFromDBInJson => {
 
 const section = new Section(creatCard, elementsSelector)
 
-api.getInitialCards().then(arrayCardsFromDBInJson  => {
+api.getInitialCards().then(arrayCardsFromDBInJson => {
   section.render(arrayCardsFromDBInJson)
 })
 
@@ -48,37 +48,35 @@ const profileEditPopup = new PopupWithForm(popupProfileEditSelector, (event) => 
   const a = profileEditPopup.getInputValues()
   //console.log(a)
   api.editUserInfoInDb(a.profilename, a.profilestatus)
-  .then((userDetails) => {
-    userInfo.setUserInfoDB(userDetails)
-  })
-  .catch((err) => {
-    console.log(err); // выведем ошибку в консоль
-  }); 
+    .then((userDetails) => {
+      userInfo.setUserInfoDB(userDetails)
+    })
+    .catch((err) => {
+      console.log(err); // выведем ошибку в консоль
+    });
 
 
   profileEditPopup.close()
 })
-
-
 
 function creatCard(cardData) {
   const card = new Card(cardData, '#elementTemplate', popupImageZoom.open);//в рендере создаем карточку (это колбэк фунция для создания карточки)
   return card.generateCard(); //и возвращаем методом generate card дом элемент карточки со всеми слушателями
 }
 
-// const section = new Section({
-//   items: initialCards, //мой массив карточек
-//   renderer: creatCard
-// }, elementsSelector) //создала константу-селектор для контейнера карточек
-
-// section.render()
-
 const addPopup = new PopupWithForm(popupAddSelector, (event) => {
   event.preventDefault();
-  const newCard = creatCard(addPopup.getInputValues());
-  section.addNewItem(newCard);
-  addPopup.close()
+  const newCardData = addPopup.getInputValues()
+  api.addNewCardToServer(newCardData.namePlace, newCardData.link)
 
+    .then((cardDetailsFromDB) => {
+      const newCard = creatCard(cardDetailsFromDB);
+      section.addNewItem(newCard);
+      addPopup.close()
+    })
+    .catch((err) => {
+      console.log(err); // выведем ошибку в консоль
+    });
 })
 
 forms.forEach((formElement) => {
@@ -106,3 +104,9 @@ profileButtonAdd.addEventListener("click", openPopupAdd);
 
 
 
+// const section = new Section({
+//   items: initialCards, //мой массив карточек
+//   renderer: creatCard
+// }, elementsSelector) //создала константу-селектор для контейнера карточек
+
+// section.render()

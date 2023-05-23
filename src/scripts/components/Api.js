@@ -46,6 +46,25 @@ export default class Api {
     
   }
 
+  addNewCardToServer = (nameNewCard, linkNewCard) => {
+    console.log(nameNewCard)
+    return fetch(this._baseUrl + "/cards", {
+      method: 'POST',
+      headers: this._headers,
+      body: JSON.stringify({
+        name: nameNewCard,
+        link: linkNewCard
+      })
+    })
+    .then(res => {
+      if (res.ok) {
+        return res.json();
+      }
+      // если ошибка, отклоняем промис
+      return Promise.reject(`Ошибка: ${res.status}`);
+    });
+  }
+
 
 
 

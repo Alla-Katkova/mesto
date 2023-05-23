@@ -1,0 +1,15 @@
+.profile__avatar-edit-button {
+  background-image: url(../../../images/Vector.svg);
+  background-position: 50%;
+  background-repeat: no-repeat;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  height: 100%; 
+  max-height: 120px;
+  max-width: 120px; 
+  padding: 0;
+  margin-top: 24px;
+  width: 100%;
+  opacity: 0.8;
+}

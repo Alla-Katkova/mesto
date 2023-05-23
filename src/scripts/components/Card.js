@@ -2,6 +2,7 @@ export default class Card {
   constructor(data, templateSelector, handleCardClick) {
     this._name = data.name;
     this._link = data.link;
+    this._likes = data.likes
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick
   }
@@ -27,7 +28,8 @@ export default class Card {
     this._elementPhoto.alt = this._name; //можно поставить написать this._elementPhoto.setAttribute('alt', this._name) равнозначно
     const elementCaption = this._element.querySelector(".element__caption");
     elementCaption.textContent = this._name;
-
+    const likesCounter = this._element.querySelector(".element__counter");
+    likesCounter.textContent = this._likes.length
     //Вернём элемент наружу
     return this._element;
   }
