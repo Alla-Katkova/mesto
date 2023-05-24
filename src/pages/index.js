@@ -20,6 +20,7 @@ import {
 } from '../scripts/utils/constants.js'
 
 import Api from "../scripts/components/Api";
+import PopupWithConfirmation from "../scripts/components/PopupWithConfirmation";
 
 const api = new Api({
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-66',
@@ -29,10 +30,27 @@ const api = new Api({
   }
 });
 
+
+const popupConfirationDeletionSelector = ".popup-confirmation-delete"
+const popupDeleteCard = new PopupWithConfirmation(popupConfirationDeletionSelector, (element) => {
+  element.removeCard()
+  popupDeleteCard.close()
+})
+//console.log(popupDeleteCard)
+
+// const popupAvatarSelector = ".popup-avatar-edit"
+// const popupAvatarEdit = new PopupWithForm(popupAvatarSelector, (data) => {  //getInputValues соберет данные с одного импута и передаст в data
+// //найду src которому хочу присвоить свою картинку
+//   document.querySelector(".profile__avatar").src = data.avatar
+//      popupAvatarEdit.close()
+// })
+
+
 const userInfo = new UserInfo(userInfoConfig)
 const section = new Section(creatCard, elementsSelector)
+
 api.getDataForInitialPageRendering().then(response => {
-  //console.log(response)
+  //console.log(response) тк используем profise all , то responce является массивом результатов всех fetch-ей
   const [userDataFromDB, cardsDataFromDB] = response   //деструктурируем результат выполнения двух фетчей, который пришел в виде массива
   userInfo.setUserInfoDB(userDataFromDB);
   userInfo.setCurrentUserId(userDataFromDB._id);
@@ -40,23 +58,11 @@ api.getDataForInitialPageRendering().then(response => {
   section.render(cardsDataFromDB)
 })
 
-api.getUserDetailsFromDataBase().then(userDetailsFromDBInJson => {
-  // userInfo.setUserInfoDB(userDetailsFromDBInJson);
-  // userInfo.setCurrentUserId(userDetailsFromDBInJson._id);
- // console.log(userInfo.getCurrentUserId())
-
-})
 
 function creatCard(cardData) {
-  const card = new Card(cardData, '#elementTemplate', popupImageZoom.open);//в рендере создаем карточку (это колбэк фунция для создания карточки)
+  const card = new Card(cardData, '#elementTemplate', popupImageZoom.open, popupDeleteCard.open);//в рендере создаем карточку (это колбэк фунция для создания карточки)
   return card.generateCard(userInfo.getCurrentUserId()); //и возвращаем методом generate card дом элемент карточки со всеми слушателями
 }
-
-
-api.getInitialCards().then(arrayCardsFromDBInJson => {
- // section.render(arrayCardsFromDBInJson)
-})
-
 
 const popupImageZoom = new PopupWithImage(popupZoomSelector);
 
@@ -75,8 +81,6 @@ const profileEditPopup = new PopupWithForm(popupProfileEditSelector, (event) => 
 
   profileEditPopup.close()
 })
-
-
 
 const addPopup = new PopupWithForm(popupAddSelector, (event) => {
   event.preventDefault();
@@ -113,9 +117,19 @@ popupImageZoom.setEventListeners();
 profileEditPopup.setEventListeners()
 addPopup.setEventListeners()
 
+popupDeleteCard.setEventListeners()
+
 profileButtonEdit.addEventListener("click", openPopupProfileEdit);
 profileButtonAdd.addEventListener("click", openPopupAdd);
 
+
+// //кнопка для нажатия аватара
+// document.querySelector(".profile__avatar-edit-button").addEventListener('click', () => {
+//   // валидация формы? popupAvatarEdit
+//   popupAvatarEdit.open()
+// })
+
+// popupAvatarEdit.setEventListeners()
 
 
 // const section = new Section({
@@ -124,3 +138,20 @@ profileButtonAdd.addEventListener("click", openPopupAdd);
 // }, elementsSelector) //создала константу-селектор для контейнера карточек
 
 // section.render()
+
+
+// api.getUserDetailsFromDataBase().then(userDetailsFromDBInJson => {
+//   // userInfo.setUserInfoDB(userDetailsFromDBInJson);
+//   // userInfo.setCurrentUserId(userDetailsFromDBInJson._id);
+//  // console.log(userInfo.getCurrentUserId())
+
+// })
+
+
+
+
+
+// api.getInitialCards().then(arrayCardsFromDBInJson => {
+//  // section.render(arrayCardsFromDBInJson)
+// })
+

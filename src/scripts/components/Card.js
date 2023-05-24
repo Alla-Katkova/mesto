@@ -1,12 +1,14 @@
 export default class Card {
-  constructor(data, templateSelector, handleCardClick) {
+  constructor(data, templateSelector, handleCardClick, handleOpenConfirmationPopup) {  //handleDeleteButtonClick
     this._name = data.name;
     this._link = data.link;
     this._likes = data.likes;
     this._owner = data.owner;
     this._id = data._id;
     this._templateSelector = templateSelector;
-    this._handleCardClick = handleCardClick
+    this._handleCardClick = handleCardClick;
+    //this._handleDeleteButtonClick = handleDeleteButtonClick
+    this._handleOpenConfirmationPopup = handleOpenConfirmationPopup;
   }
 
   _getTemplate() {
@@ -62,10 +64,17 @@ export default class Card {
   _handleDeleteButtonClick() {
     //const button = event.target;
     //this._element = button.closest(".element");
-    this._element.remove();
+    // this._element.remove();
+    this._handleOpenConfirmationPopup(this)
   }
 
   _handleOpenPopupFullImage() {
     this._handleCardClick(this._name, this._link)
+  }
+
+  removeCard() {
+    console.log("zhopppp")
+    this._element.remove();
+    //this.element = null
   }
 }

@@ -40,6 +40,7 @@ const popupZoomSelector = '.popup-zoom';
 const popupAddSelector = ".popup-add";
 const popupProfileEditSelector = ".popup-edit"
 
+
 // селекторы для валидации
 const validationConfig = {
   formSelector: '.popup__form',
