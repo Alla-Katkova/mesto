@@ -73,7 +73,6 @@ export default class Card {
   }
 
   removeCard() {
-    console.log("zhopppp")
     this._element.remove();
     //this.element = null
   }

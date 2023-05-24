@@ -39,6 +39,8 @@ const elementsSelector = '.elements'
 const popupZoomSelector = '.popup-zoom';
 const popupAddSelector = ".popup-add";
 const popupProfileEditSelector = ".popup-edit"
+const popupAvatarSelector = ".popup-avatar-edit"
+const popupConfirationDeletionSelector = ".popup-confirmation-delete"
 
 
 // селекторы для валидации
@@ -64,5 +66,7 @@ export {
   popupZoomSelector,
   popupAddSelector,
   popupProfileEditSelector,
+  popupAvatarSelector,
+  popupConfirationDeletionSelector,
   validationConfig
 }

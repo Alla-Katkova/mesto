@@ -33,7 +33,6 @@ export default class PopupWithForm extends Popup {
   }
 
   setEventListeners() {
-    //console.log('zhopa')
     super.setEventListeners();
     this._form.addEventListener('submit', this._submitFormFunction)
   }

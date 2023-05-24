@@ -15,6 +15,8 @@ import {
   elementsSelector,
   popupZoomSelector,
   popupAddSelector,
+  popupAvatarSelector,
+  popupConfirationDeletionSelector,
   popupProfileEditSelector,
   validationConfig
 } from '../scripts/utils/constants.js'
@@ -31,19 +33,20 @@ const api = new Api({
 });
 
 
-const popupConfirationDeletionSelector = ".popup-confirmation-delete"
 const popupDeleteCard = new PopupWithConfirmation(popupConfirationDeletionSelector, (element) => {
   element.removeCard()
   popupDeleteCard.close()
 })
-//console.log(popupDeleteCard)
 
-// const popupAvatarSelector = ".popup-avatar-edit"
-// const popupAvatarEdit = new PopupWithForm(popupAvatarSelector, (data) => {  //getInputValues соберет данные с одного импута и передаст в data
-// //найду src которому хочу присвоить свою картинку
-//   document.querySelector(".profile__avatar").src = data.avatar
-//      popupAvatarEdit.close()
-// })
+const popupAvatarEdit = new PopupWithForm(popupAvatarSelector, (event) => {  //getInputValues соберет данные с одного импута и передаст в data
+  event.preventDefault();
+  const avatarPicture = popupAvatarEdit.getInputValues()
+  //найду src которому хочу присвоить свою картинку
+  document.querySelector(".profile__avatar").src = avatarPicture.avatar
+  console.log(avatarPicture.avatar)
+  popupAvatarEdit.close()
+
+})
 
 
 const userInfo = new UserInfo(userInfoConfig)
@@ -113,23 +116,26 @@ function openPopupAdd() {
   validators.popupFormAdd.disableButton()
 }
 
+//кнопка для нажатия аватара
+document.querySelector(".profile__avatar-edit-button").addEventListener('click', () => {
+  // валидация формы? popupAvatarEdit
+  popupAvatarEdit.open()
+})
+
+
 popupImageZoom.setEventListeners();
 profileEditPopup.setEventListeners()
 addPopup.setEventListeners()
-
+popupAvatarEdit.setEventListeners()
 popupDeleteCard.setEventListeners()
 
 profileButtonEdit.addEventListener("click", openPopupProfileEdit);
 profileButtonAdd.addEventListener("click", openPopupAdd);
 
 
-// //кнопка для нажатия аватара
-// document.querySelector(".profile__avatar-edit-button").addEventListener('click', () => {
-//   // валидация формы? popupAvatarEdit
-//   popupAvatarEdit.open()
-// })
 
-// popupAvatarEdit.setEventListeners()
+
+
 
 
 // const section = new Section({
