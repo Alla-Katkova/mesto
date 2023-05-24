@@ -3,12 +3,13 @@ export default class Card {
     this._name = data.name;
     this._link = data.link;
     this._likes = data.likes;
-    this._owner = data.owner;
-    this._id = data._id;
+    this._owner = data.owner; //this._ownerId = data.owner._id; 
+    this._cardId = data._id;
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
     //this._handleDeleteButtonClick = handleDeleteButtonClick
     this._handleOpenConfirmationPopup = handleOpenConfirmationPopup;
+  
   }
 
   _getTemplate() {
@@ -65,7 +66,7 @@ export default class Card {
     //const button = event.target;
     //this._element = button.closest(".element");
     // this._element.remove();
-    this._handleOpenConfirmationPopup(this)
+    this._handleOpenConfirmationPopup({ card: this, cardId: this._cardId })
   }
 
   _handleOpenPopupFullImage() {

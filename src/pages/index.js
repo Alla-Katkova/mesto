@@ -32,10 +32,15 @@ const api = new Api({
   }
 });
 
-
-const popupDeleteCard = new PopupWithConfirmation(popupConfirationDeletionSelector, (element) => {
-  element.removeCard()
-  popupDeleteCard.close()
+const popupDeleteCard = new PopupWithConfirmation(popupConfirationDeletionSelector, ({card, cardId}) => {
+  api.deleteCardFromDB(cardId)
+  .then(() => {
+    card.removeCard()
+    popupDeleteCard.close()
+  })
+  .catch((err) => {
+    console.log(err); // выведем ошибку в консоль
+  });
 })
 
 const popupAvatarEdit = new PopupWithForm(popupAvatarSelector, (event) => {  //getInputValues соберет данные с одного импута и передаст в data
@@ -43,11 +48,8 @@ const popupAvatarEdit = new PopupWithForm(popupAvatarSelector, (event) => {  //g
   const avatarPicture = popupAvatarEdit.getInputValues()
   //найду src которому хочу присвоить свою картинку
   document.querySelector(".profile__avatar").src = avatarPicture.avatar
-  console.log(avatarPicture.avatar)
   popupAvatarEdit.close()
-
 })
-
 
 const userInfo = new UserInfo(userInfoConfig)
 const section = new Section(creatCard, elementsSelector)

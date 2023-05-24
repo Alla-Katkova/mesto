@@ -9,9 +9,10 @@ export default class PopupWithConfirmation extends Popup {
 
   }
 
-  open = (element) => {   //моя корзина
-    this._element = element; //при открытии сздасться в объекте PopupWithConfirmation свойство элемент и туда запишется аругмент element
+  open = ({card, cardId}) => {   //моя корзина
     super.open();
+    this._element = card; //при открытии сздасться в объекте PopupWithConfirmation свойство элемент и туда запишется аругмент element
+    this._cardId = cardId
   }
 
   setEventListeners() {
@@ -19,7 +20,8 @@ export default class PopupWithConfirmation extends Popup {
     super.setEventListeners();
     this._form.addEventListener('submit', (event) => {
       event.preventDefault();
-      this._handleConfirmationDelete(this._element)
+      this._handleConfirmationDelete({ card:this._element, cardId:this._cardId })
+      this.close()
     })
   }
 
