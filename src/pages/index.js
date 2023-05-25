@@ -41,23 +41,30 @@ const popupDeleteCard = new PopupWithConfirmation(popupConfirationDeletionSelect
     })
     .catch((err) => {
       console.log(err); // выведем ошибку в консоль
-    });
+    })
+    .finally(() =>
+      popupDeleteCard.setDefaultButtonText() //уберем точки загрузки с кнопки
+    )
 })
 
 const popupAvatarEdit = new PopupWithForm(popupAvatarSelector, (event) => {  //getInputValues соберет данные с одного импута
   event.preventDefault();
+  popupAvatarEdit.setNewButtonText() // добавим точки при загрузки на кнопку сабмита
   const avatarPicture = popupAvatarEdit.getInputValues()
   //найду src которому хочу присвоить свою картинку
   document.querySelector(".profile__avatar").src = avatarPicture.avatar
   //console.log(avatarPicture.avatar)
   api.editAvaratInDB(avatarPicture.avatar)
     .then((response) => {
-      userInfo.setUserInfoDB({ avatar: response.avatar, ...response})// в promice all вводила responce, если деструктурирровать только аватар, 
+      userInfo.setUserInfoDB({ avatar: response.avatar, ...response })// в promice all вводила responce, если деструктурирровать только аватар, 
       popupAvatarEdit.close()                                                                // то имя и статус будут пустыми, чтобы не дублировать код - воткнула имя и статус в response  
     })
     .catch((err) => {
-      console.log(err); 
-    });
+      console.log(err);
+    })
+    .finally(() =>
+      popupAvatarEdit.setDefaultButtonText() //уберем точки загрузки с кнопки
+    )
 })
 
 const userInfo = new UserInfo(userInfoConfig)
@@ -82,21 +89,27 @@ const popupImageZoom = new PopupWithImage(popupZoomSelector);
 
 const profileEditPopup = new PopupWithForm(popupProfileEditSelector, (event) => {
   event.preventDefault();
-  const a = profileEditPopup.getInputValues()
-  api.editUserInfoInDb(a.profilename, a.profilestatus)
+  profileEditPopup.setNewButtonText() // добавим точки при загрузки на кнопку сабмита
+  const newUserInfoData = profileEditPopup.getInputValues()
+  api.editUserInfoInDb(newUserInfoData.profilename, newUserInfoData.profilestatus)
+
     .then((userDetails) => {
       userInfo.setUserInfoDB(userDetails)
+      profileEditPopup.close()
     })
     .catch((err) => {
       console.log(err); // выведем ошибку в консоль
-    });
+    })
+    .finally(() =>
+      profileEditPopup.setDefaultButtonText() //уберем точки загрузки с кнопки
+    )
 
-
-  profileEditPopup.close()
 })
 
 const addPopup = new PopupWithForm(popupAddSelector, (event) => {
   event.preventDefault();
+  addPopup.setNewButtonText() // добавим точки при загрузки на кнопку сабмита
+
   const newCardData = addPopup.getInputValues()
   api.addNewCardToServer(newCardData.namePlace, newCardData.link)
 
@@ -107,7 +120,10 @@ const addPopup = new PopupWithForm(popupAddSelector, (event) => {
     })
     .catch((err) => {
       console.log(err); // выведем ошибку в консоль
-    });
+    })
+    .finally(() =>
+      addPopup.setDefaultButtonText() //уберем точки загрузки с кнопки
+    )
 })
 
 forms.forEach((formElement) => {

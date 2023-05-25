@@ -5,7 +5,9 @@ export default class PopupWithForm extends Popup {
     super(popupSelector);
     this._submitFormFunction = submitFormFunction;
     this._form = this._popup.querySelector('.popup__form');
-    this._allInput = this._form.querySelectorAll('.popup__input')
+    this._allInput = this._form.querySelectorAll('.popup__input');
+    this._submitButton = this._form.querySelector('.popup__save-button'); //для ... в кнопке сохранения
+    this._defaultButtonText = this._submitButton.textContent;// изначальная кнопка без ...
   }
 
   getInputValues() {
@@ -29,12 +31,21 @@ export default class PopupWithForm extends Popup {
   close() {
     super.close();
     this._form.reset();
-
   }
+
+
 
   setEventListeners() {
     super.setEventListeners();
     this._form.addEventListener('submit', this._submitFormFunction)
+  }
+
+  setNewButtonText() {
+    this._submitButton.textContent = `${this._submitButton.textContent}...` // добавляю три точки к кнопкам
+  }
+
+  setDefaultButtonText() {
+    this._submitButton.textContent = this._defaultButtonText //при сбросе присваиваем кнопке изначальное значение без точек (это содержиться в defaultButton)
   }
 
 }
