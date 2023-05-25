@@ -52,10 +52,12 @@ const popupAvatarEdit = new PopupWithForm(popupAvatarSelector, (event) => {  //g
   //console.log(avatarPicture.avatar)
   api.editAvaratInDB(avatarPicture.avatar)
     .then((response) => {
-      userInfo.setUserInfoDB({ avatar: response.avatar, ...response})
-      popupAvatarEdit.close()
+      userInfo.setUserInfoDB({ avatar: response.avatar, ...response})// в promice all вводила responce, если деструктурирровать только аватар, 
+      popupAvatarEdit.close()                                                                // то имя и статус будут пустыми, чтобы не дублировать код - воткнула имя и статус в response  
     })
-
+    .catch((err) => {
+      console.log(err); 
+    });
 })
 
 const userInfo = new UserInfo(userInfoConfig)
