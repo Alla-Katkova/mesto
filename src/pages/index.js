@@ -32,24 +32,30 @@ const api = new Api({
   }
 });
 
-const popupDeleteCard = new PopupWithConfirmation(popupConfirationDeletionSelector, ({card, cardId}) => {
+const popupDeleteCard = new PopupWithConfirmation(popupConfirationDeletionSelector, ({ card, cardId }) => {
   api.deleteCardFromDB(cardId)
-  .then((response) => {
-    //console.log(response)
-    card.removeCard()
-    popupDeleteCard.close()
-  })
-  .catch((err) => {
-    console.log(err); // выведем ошибку в консоль
-  });
+    .then((response) => {
+      //console.log(response)
+      card.removeCard()
+      popupDeleteCard.close()
+    })
+    .catch((err) => {
+      console.log(err); // выведем ошибку в консоль
+    });
 })
 
-const popupAvatarEdit = new PopupWithForm(popupAvatarSelector, (event) => {  //getInputValues соберет данные с одного импута и передаст в data
+const popupAvatarEdit = new PopupWithForm(popupAvatarSelector, (event) => {  //getInputValues соберет данные с одного импута
   event.preventDefault();
   const avatarPicture = popupAvatarEdit.getInputValues()
   //найду src которому хочу присвоить свою картинку
   document.querySelector(".profile__avatar").src = avatarPicture.avatar
-  popupAvatarEdit.close()
+  //console.log(avatarPicture.avatar)
+  api.editAvaratInDB(avatarPicture.avatar)
+    .then((response) => {
+      userInfo.setUserInfoDB({ avatar: response.avatar, ...response})
+      popupAvatarEdit.close()
+    })
+
 })
 
 const userInfo = new UserInfo(userInfoConfig)
@@ -75,7 +81,6 @@ const popupImageZoom = new PopupWithImage(popupZoomSelector);
 const profileEditPopup = new PopupWithForm(popupProfileEditSelector, (event) => {
   event.preventDefault();
   const a = profileEditPopup.getInputValues()
-  //console.log(a)
   api.editUserInfoInDb(a.profilename, a.profilestatus)
     .then((userDetails) => {
       userInfo.setUserInfoDB(userDetails)

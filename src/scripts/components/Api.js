@@ -5,12 +5,12 @@ export default class Api {
     //this._authorization = config.headers.authorization;
   }
 
-    _checkResponse(res) {
-      if (res.ok) {
-          return res.json();
-      } else {
-          return Promise.reject(`Ошибка: ${res.status}`);
-      }
+  _checkResponse(res) {
+    if (res.ok) {
+      return res.json();
+    } else {
+      return Promise.reject(`Ошибка: ${res.status}`);
+    }
   }
 
   getUserDetailsFromDataBase = () => {
@@ -22,7 +22,7 @@ export default class Api {
   getInitialCards = () => {
     //console.log() 
     return fetch(this._baseUrl + "/cards", { headers: this._headers })
-    .then(this._checkResponse)
+      .then(this._checkResponse)
   }
 
   getDataForInitialPageRendering = () => {
@@ -38,12 +38,11 @@ export default class Api {
         about: aboutFromForm
       })
     })
-    .then(this._checkResponse)
+      .then(this._checkResponse)
 
   }
 
   addNewCardToServer = (nameNewCard, linkNewCard) => {
-    //console.log(nameNewCard)
     return fetch(this._baseUrl + "/cards", {
       method: 'POST',
       headers: this._headers,
@@ -52,7 +51,7 @@ export default class Api {
         link: linkNewCard
       })
     })
-    .then(this._checkResponse)
+      .then(this._checkResponse)
   }
 
   deleteCardFromDB = (id) => {
@@ -60,11 +59,20 @@ export default class Api {
       method: 'DELETE',
       headers: this._headers,
     })
-    .then(this._checkResponse)
-
+      .then(this._checkResponse)
   }
 
-
+  editAvaratInDB = (linkToAvatar) => {
+    return fetch(this._baseUrl + "/users/me/avatar", {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify({
+        avatar: linkToAvatar
+        //avatar: data.avatar
+      })
+    })
+      .then(this._checkResponse)
+  }
 
 
 
