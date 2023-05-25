@@ -35,7 +35,7 @@ const api = new Api({
 const popupDeleteCard = new PopupWithConfirmation(popupConfirationDeletionSelector, ({card, cardId}) => {
   api.deleteCardFromDB(cardId)
   .then((response) => {
-    console.log(response)
+    //console.log(response)
     card.removeCard()
     popupDeleteCard.close()
   })
