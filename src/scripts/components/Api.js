@@ -5,35 +5,24 @@ export default class Api {
     //this._authorization = config.headers.authorization;
   }
 
-  //   _checkResponse(res) {
-  //     if (res.ok) {
-  //         return res.json();
-  //     } else {
-  //         return Promise.reject(`Ошибка: ${res.status}`);
-  //     }
-  // }
+    _checkResponse(res) {
+      if (res.ok) {
+          return res.json();
+      } else {
+          return Promise.reject(`Ошибка: ${res.status}`);
+      }
+  }
 
   getUserDetailsFromDataBase = () => {
     return fetch(this._baseUrl + "/users/me", { headers: this._headers }) //headers: {authorization: this._authorization}
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject('Error')
-      })
+      .then(this._checkResponse)
   }
 
 
   getInitialCards = () => {
     //console.log() 
     return fetch(this._baseUrl + "/cards", { headers: this._headers })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        // если ошибка, отклоняем промис
-        return Promise.reject(`Ошибка: ${res.status}`);
-      });
+    .then(this._checkResponse)
   }
 
   getDataForInitialPageRendering = () => {
@@ -49,13 +38,7 @@ export default class Api {
         about: aboutFromForm
       })
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        // если ошибка, отклоняем промис
-        return Promise.reject(`Ошибка: ${res.status}`);
-      });
+    .then(this._checkResponse)
 
   }
 
@@ -69,13 +52,7 @@ export default class Api {
         link: linkNewCard
       })
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        // если ошибка, отклоняем промис
-        return Promise.reject(`Ошибка: ${res.status}`);
-      });
+    .then(this._checkResponse)
   }
 
   deleteCardFromDB = (id) => {
@@ -83,14 +60,7 @@ export default class Api {
       method: 'DELETE',
       headers: this._headers,
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        // если ошибка, отклоняем промис
-        return Promise.reject(`Ошибка: ${res.status}`);
-      });
-
+    .then(this._checkResponse)
 
   }
 
