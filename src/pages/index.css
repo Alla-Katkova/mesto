@@ -43,3 +43,4 @@
 @import url(../blocks/profile/__avatar-edit-button/profile__avatar-edit-button.css);
 @import url(../blocks/element/__like-container/element__like-container.css);
 @import url(../blocks/element/__counter/element__counter.css);
+@import url(../blocks/popup/__heading-confirmation-delete/popup__heading-confirmation-delete.css);
