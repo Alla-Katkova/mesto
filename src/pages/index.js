@@ -80,8 +80,28 @@ api.getDataForInitialPageRendering().then(response => {
 })
 
 
-function creatCard(cardData) {
-  const card = new Card(cardData, '#elementTemplate', popupImageZoom.open, popupDeleteCard.open);//в рендере создаем карточку (это колбэк фунция для создания карточки)
+function creatCard(cardData) { //в рендере создаем карточку (это колбэк фунция для создания карточки)
+  const card = new Card(cardData, '#elementTemplate', popupImageZoom.open, popupDeleteCard.open, (likeButton, cardId) => {
+
+    if (likeButton.classList.contains("element__like-button_active")) {
+
+      api.putDislike(cardId)
+        .then(response => {
+          //console.log(response)
+          card.likeToggle(response.likes)
+        })
+        .catch((error) => console.error(`Ошибка при снятии лайка ${error}`))
+    } else {
+      api.putLike(cardId)
+        .then(response => {
+          card.likeToggle(response.likes)
+         // console.log(response)
+        })
+        .catch((error) => console.error(`Ошибка при добалении лайка ${error}`))
+    }
+
+  });
+
   return card.generateCard(userInfo.getCurrentUserId()); //и возвращаем методом generate card дом элемент карточки со всеми слушателями
 }
 
@@ -142,12 +162,6 @@ function openPopupAdd() {
   validators.popupFormAdd.disableButton()
 }
 
-//кнопка для нажатия аватара
-document.querySelector(".profile__avatar-edit-button").addEventListener('click', () => {
-  // валидация формы? popupAvatarEdit
-  popupAvatarEdit.open()
-})
-
 
 popupImageZoom.setEventListeners();
 profileEditPopup.setEventListeners()
@@ -157,33 +171,9 @@ popupDeleteCard.setEventListeners()
 
 profileButtonEdit.addEventListener("click", openPopupProfileEdit);
 profileButtonAdd.addEventListener("click", openPopupAdd);
+//кнопка для нажатия аватара
+document.querySelector(".profile__avatar-edit-button").addEventListener('click', () => {
+  popupAvatarEdit.open()
+})
 
-
-
-
-
-
-
-// const section = new Section({
-//   items: initialCards, //мой массив карточек
-//   renderer: creatCard
-// }, elementsSelector) //создала константу-селектор для контейнера карточек
-
-// section.render()
-
-
-// api.getUserDetailsFromDataBase().then(userDetailsFromDBInJson => {
-//   // userInfo.setUserInfoDB(userDetailsFromDBInJson);
-//   // userInfo.setCurrentUserId(userDetailsFromDBInJson._id);
-//  // console.log(userInfo.getCurrentUserId())
-
-// })
-
-
-
-
-
-// api.getInitialCards().then(arrayCardsFromDBInJson => {
-//  // section.render(arrayCardsFromDBInJson)
-// })
 
