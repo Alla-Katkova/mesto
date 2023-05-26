@@ -159,22 +159,24 @@ function openPopupProfileEdit() {
 }
 
 function openPopupAdd() {
-  addPopup.open()
-  validators.popupFormAdd.disableButton()
+  addPopup.open();
+  validators.popupFormAdd.disableButton();
+}
+
+function openPopupAvatarEdit() {
+  popupAvatarEdit.open();
+  validators.popupAvatarEdit.disableButton();
 }
 
 
 popupImageZoom.setEventListeners();
-profileEditPopup.setEventListeners()
-addPopup.setEventListeners()
-popupAvatarEdit.setEventListeners()
-popupDeleteCard.setEventListeners()
+profileEditPopup.setEventListeners();
+addPopup.setEventListeners();
+popupAvatarEdit.setEventListeners();
+popupDeleteCard.setEventListeners();
 
 profileButtonEdit.addEventListener("click", openPopupProfileEdit);
 profileButtonAdd.addEventListener("click", openPopupAdd);
-//кнопка для нажатия аватара
-avatarButtonEdit.addEventListener('click', () => {
-  popupAvatarEdit.open()
-})
+avatarButtonEdit.addEventListener('click', openPopupAvatarEdit);
 
 
