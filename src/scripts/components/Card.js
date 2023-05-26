@@ -1,5 +1,5 @@
 export default class Card {
-  constructor(data, templateSelector, handleCardClick, handleOpenConfirmationPopup, likeToggle) {  //handleDeleteButtonClick
+  constructor(data, templateSelector, handleCardClick, handleOpenConfirmationPopup, likeToggleInDB) {  //handleDeleteButtonClick
     this._name = data.name;
     this._link = data.link;
     this._likes = data.likes;
@@ -8,9 +8,8 @@ export default class Card {
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
     this._handleOpenConfirmationPopup = handleOpenConfirmationPopup;
-    // this._handleLikeChange = handleLikeChange ;
-    this._likeToggle = likeToggle;
-   // console.log(this._likes)
+    this._likeToggleInDB = likeToggleInDB;
+
   }
 
   _getTemplate() {
@@ -50,11 +49,10 @@ export default class Card {
   likeToggle(likes) {  
     this._likeButton.classList.toggle("element__like-button_active");
     this._likesCounter.textContent = likes.length
-    console.log(likes.length)
   }
 
   _handleLikeToggle = () => {
-    this._likeToggle(this._likeButton, this._cardId)
+    this._likeToggleInDB(this._likeButton, this._cardId)
   }
 
   // проверка лайков, их почернение и счетчик количества
