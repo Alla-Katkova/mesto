@@ -8,7 +8,7 @@ export default class Section {
 
   //рендер создает из каждого элемента массива (name link) карточку 
   // модифиц функция creatCard будет по сути рендером
-  render(items) {
+  renderItems(items) {
     items.forEach(element => {
       this.addItem(this._renderer(element))
     })

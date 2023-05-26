@@ -9,6 +9,7 @@ import {
   initialCards,
   profileButtonEdit,
   profileButtonAdd,
+  avatarButtonEdit,
   forms,
   validators,
   userInfoConfig,
@@ -52,7 +53,7 @@ const popupAvatarEdit = new PopupWithForm(popupAvatarSelector, (event) => {  //g
   popupAvatarEdit.setNewButtonText() // добавим точки при загрузки на кнопку сабмита
   const avatarPicture = popupAvatarEdit.getInputValues()
   //найду src которому хочу присвоить свою картинку
-  document.querySelector(".profile__avatar").src = avatarPicture.avatar
+  //document.querySelector(".profile__avatar").src = avatarPicture.avatar
   //console.log(avatarPicture.avatar)
   api.editAvaratInDB(avatarPicture.avatar)
     .then((response) => {
@@ -76,7 +77,7 @@ api.getDataForInitialPageRendering().then(response => {
   userInfo.setUserInfoDB(userDataFromDB);
   userInfo.setCurrentUserId(userDataFromDB._id);
 
-  section.render(cardsDataFromDB)
+  section.renderItems(cardsDataFromDB)
 })
 
 
@@ -172,7 +173,7 @@ popupDeleteCard.setEventListeners()
 profileButtonEdit.addEventListener("click", openPopupProfileEdit);
 profileButtonAdd.addEventListener("click", openPopupAdd);
 //кнопка для нажатия аватара
-document.querySelector(".profile__avatar-edit-button").addEventListener('click', () => {
+avatarButtonEdit.addEventListener('click', () => {
   popupAvatarEdit.open()
 })
 

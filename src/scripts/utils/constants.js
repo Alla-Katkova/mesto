@@ -28,6 +28,7 @@ const initialCards = [
 
 const profileButtonEdit = document.querySelector(".profile__button-edit");
 const profileButtonAdd = document.querySelector(".profile__button-add");
+const avatarButtonEdit = document.querySelector(".profile__avatar-edit-button")
 
 const userInfoConfig = {
   nameSelector: ".profile__name",
@@ -68,5 +69,6 @@ export {
   popupProfileEditSelector,
   popupAvatarSelector,
   popupConfirationDeletionSelector,
-  validationConfig
+  validationConfig,
+  avatarButtonEdit
 }
