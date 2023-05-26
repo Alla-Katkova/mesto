@@ -1,5 +1,5 @@
 export default class Card {
-  constructor(data, templateSelector, handleCardClick, handleOpenConfirmationPopup, likeToggleInDB) {  //handleDeleteButtonClick
+  constructor(data, templateSelector, handleCardClick, handleOpenConfirmationPopup, likeToggleInDB, currentUserId) {  //handleDeleteButtonClick
     this._name = data.name;
     this._link = data.link;
     this._likes = data.likes;
@@ -9,7 +9,7 @@ export default class Card {
     this._handleCardClick = handleCardClick;
     this._handleOpenConfirmationPopup = handleOpenConfirmationPopup;
     this._likeToggleInDB = likeToggleInDB;
-
+    this._currentUserId = currentUserId
   }
 
   _getTemplate() {
@@ -21,7 +21,7 @@ export default class Card {
     return newElement;
   }
 
-  generateCard(currentUserId) {
+  generateCard() {
     // Запишем разметку в приватное поле _element.
     // Так у других элементов появится доступ к ней.
     this._element = this._getTemplate(); // тут создаю элемент
@@ -38,15 +38,15 @@ export default class Card {
     //лайки
     this._likesCounter = this._element.querySelector(".element__counter");
     this._likesCounter.textContent = this._likes.length // вводим счетчик лайков и заставляем его их считать (возвращается массив- количество лайков =длине массива)
-    this._checkLikesStatus(currentUserId)
+    this._checkLikesStatus()
     // урны
-    this._putTrashBin(currentUserId)
+    this._putTrashBin()
     //Вернём элемент наружу
     return this._element;
   }
 
   //лайки переключатель
-  likeToggle(likes) {  
+  likeToggle(likes) {
     this._likeButton.classList.toggle("element__like-button_active");
     this._likesCounter.textContent = likes.length
   }
@@ -56,9 +56,9 @@ export default class Card {
   }
 
   // проверка лайков, их почернение и счетчик количества
-  _checkLikesStatus(currentUserId) {
+  _checkLikesStatus() {
     this._likes.forEach((infoAboutLike) => {
-      if (currentUserId === infoAboutLike._id) {
+      if (this._currentUserId === infoAboutLike._id) {
         this._likeButton.classList.add("element__like-button_active")
         return
       }
@@ -69,8 +69,8 @@ export default class Card {
 
 
   //постановка урн
-  _putTrashBin(currentUserId) {
-    if (currentUserId !== this._owner._id) {
+  _putTrashBin() {
+    if (this._currentUserId !== this._owner._id) {
       this._element.querySelector('.element__delete-button').style.display = 'none';
     }
   }

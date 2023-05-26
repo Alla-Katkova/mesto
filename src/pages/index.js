@@ -82,6 +82,7 @@ api.getDataForInitialPageRendering().then(response => {
 
 
 function creatCard(cardData) { //в рендере создаем карточку (это колбэк фунция для создания карточки)
+ // console.log(userInfo.getCurrentUserId())
   const card = new Card(cardData, '#elementTemplate', popupImageZoom.open, popupDeleteCard.open, (likeButton, cardId) => {
 
     if (likeButton.classList.contains("element__like-button_active")) {
@@ -101,9 +102,9 @@ function creatCard(cardData) { //в рендере создаем карточк
         .catch((error) => console.error(`Ошибка при добалении лайка ${error}`))
     }
 
-  });
+  }, userInfo.getCurrentUserId())
 
-  return card.generateCard(userInfo.getCurrentUserId()); //и возвращаем методом generate card дом элемент карточки со всеми слушателями
+  return card.generateCard(); //и возвращаем методом generate card дом элемент карточки со всеми слушателями
 }
 
 const popupImageZoom = new PopupWithImage(popupZoomSelector);
