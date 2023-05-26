@@ -10,7 +10,7 @@ export default class PopupWithForm extends Popup {
     this._defaultButtonText = this._submitButton.textContent;// изначальная кнопка без ...
   }
 
-  getInputValues() {
+  _getInputValues() {
     this._values = {};
     this._allInput.forEach(input => {
       this._values[input.name] = input.value
@@ -35,7 +35,11 @@ export default class PopupWithForm extends Popup {
 
   setEventListeners() {
     super.setEventListeners();
-    this._form.addEventListener('submit', this._submitFormFunction)
+    this._form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const inputValues = this._getInputValues()
+      this._submitFormFunction(inputValues);
+    })
   }
 
   setNewButtonText() {

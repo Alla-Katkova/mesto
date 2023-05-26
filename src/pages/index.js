@@ -48,14 +48,14 @@ const popupDeleteCard = new PopupWithConfirmation(popupConfirationDeletionSelect
     )
 })
 
-const popupAvatarEdit = new PopupWithForm(popupAvatarSelector, (event) => {  //getInputValues соберет данные с одного импута
-  event.preventDefault();
+const popupAvatarEdit = new PopupWithForm(popupAvatarSelector, (inputValues) => {  //getInputValues соберет данные с одного импута
+ 
   popupAvatarEdit.setNewButtonText() // добавим точки при загрузки на кнопку сабмита
-  const avatarPicture = popupAvatarEdit.getInputValues()
+  //const avatarPicture = popupAvatarEdit.getInputValues(inputValues)
   //найду src которому хочу присвоить свою картинку
   //document.querySelector(".profile__avatar").src = avatarPicture.avatar
   //console.log(avatarPicture.avatar)
-  api.editAvaratInDB(avatarPicture.avatar)
+  api.editAvaratInDB(inputValues.avatar)
     .then((response) => {
       userInfo.setUserInfoDB({ avatar: response.avatar, ...response })// в promice all вводила responce, если деструктурирровать только аватар, 
       popupAvatarEdit.close()                                                                // то имя и статус будут пустыми, чтобы не дублировать код - воткнула имя и статус в response  
@@ -108,11 +108,11 @@ function creatCard(cardData) { //в рендере создаем карточк
 
 const popupImageZoom = new PopupWithImage(popupZoomSelector);
 
-const profileEditPopup = new PopupWithForm(popupProfileEditSelector, (event) => {
-  event.preventDefault();
+const profileEditPopup = new PopupWithForm(popupProfileEditSelector, (inputValues) => {
+  
   profileEditPopup.setNewButtonText() // добавим точки при загрузки на кнопку сабмита
-  const newUserInfoData = profileEditPopup.getInputValues()
-  api.editUserInfoInDb(newUserInfoData.profilename, newUserInfoData.profilestatus)
+  //const newUserInfoData = profileEditPopup.getInputValues()
+  api.editUserInfoInDb(inputValues.profilename, inputValues.profilestatus)
 
     .then((userDetails) => {
       userInfo.setUserInfoDB(userDetails)
@@ -127,12 +127,12 @@ const profileEditPopup = new PopupWithForm(popupProfileEditSelector, (event) => 
 
 })
 
-const addPopup = new PopupWithForm(popupAddSelector, (event) => {
-  event.preventDefault();
+const addPopup = new PopupWithForm(popupAddSelector, (inputValues) => {
+ 
   addPopup.setNewButtonText() // добавим точки при загрузки на кнопку сабмита
 
-  const newCardData = addPopup.getInputValues()
-  api.addNewCardToServer(newCardData.namePlace, newCardData.link)
+  //const newCardData = addPopup.getInputValues()
+  api.addNewCardToServer(inputValues.namePlace, inputValues.link)
 
     .then((cardDetailsFromDB) => {
       const newCard = creatCard(cardDetailsFromDB);
